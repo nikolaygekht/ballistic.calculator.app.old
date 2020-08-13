@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>JBMCalculator Unit Tests</title>
+        <script src="../../3rd_party/jquery-1.11.3.js"></script>
+        <script src="../../3rd_party/qunit/qunit-1.20.0.js"></script>
+        <script src="../../Math/ballistic.js"></script>
+        <script src="../js/help.js" type="text/javascript"></script>
+        <script src="../../Math/json.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="../../3rd_party/qunit/qunit.css">
+        <style>
+            body {
+                background-color: #bebdbb;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="margin: 15px">
+            <a style="font-size: 25px; text-decoration: none; color: #0D3349;" href="../index.html"> << Back</a>
+        </div>
+        <div style="margin: 15px; color: #0D3349; font-size: 25px;"> Referent value is: <script type="text/javascript">document.write(ROUNDED_REFERENT_VALUE.toString());</script></div>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+
+        <!--UNIT TEST SECTION-->
+        <script type="text/javascript">
+            var ballistic = new BallisticCalculator();
+            var isRightHand = $('#lh_rh').val() === "rh";
+
+            var zeroInfo = new ballistic.shotInfoArguments();
+            zeroInfo.name = null;
+            //Ammo
+            var ammoInfoArgs = new ballistic.ammoInfoArguments();
+            ammoInfoArgs.dragTable = 'g1';
+            ammoInfoArgs.ballisticCoefficient = 0.398;
+            ammoInfoArgs.muzzleVelocity = new ballistic.velocity(2780, ballistic.velocityUnits.FeetPerSecond);
+            ammoInfoArgs.bulletWeight = new ballistic.weight(147, ballistic.weightUnits.Grain);
+            zeroInfo.ammo = new ballistic.ammoInfo(ammoInfoArgs);
+
+            //Atmo
+            var atmoInfoArgs = new ballistic.atmosphereInfoArguments();
+            atmoInfoArgs.temperature = new ballistic.temperature(59, ballistic.temperatureUnits.Fahrenheit);
+            atmoInfoArgs.pressure = new ballistic.pressure(29.53, ballistic.pressureUnits.InchHg);
+            atmoInfoArgs.humidity = parseFloat(0.78);
+            atmoInfoArgs.altitude = new ballistic.distance(0, ballistic.distanceUnits.Foot);
+            zeroInfo.atmosphere = new ballistic.atmosphereInfo(atmoInfoArgs);
+            zeroInfo.cantAngle = null;
+            zeroInfo.shotAngle = null;
+            zeroInfo.wind = null;
+            zeroInfo.sightHeight = new ballistic.distance(1.5, ballistic.distanceUnits.Inch);
+            zeroInfo.zeroDistance = new ballistic.distance(100, ballistic.distanceUnits.Yard);
+            zeroInfo.nearZero = $('#nearZero').val() === "true";
+            zeroInfo.driftInfo = null;
+            zeroInfo.elevationAngle = null;
+
+            zeroInfo.step = 1;
+
+            zeroInfo.verticalClick = new ballistic.angle(0.25, ballistic.angleUnits.Moa);
+            zeroInfo.horizontalClick = new ballistic.angle(0.25, ballistic.angleUnits.Moa);
+
+            zeroInfo.targetSize = null;
+            zeroInfo.clicks = parseFloat(0);
+            //
+            var shotInfo = new ballistic.shotInfo(zeroInfo);
+            var windInfoArguments = new ballistic.windInfoArguments();
+            windInfoArguments.direction = new ballistic.angle(0, ballistic.angleUnits.Radian);
+            windInfoArguments.speed = new ballistic.velocity(0, ballistic.velocityUnits.MilesPerHour);
+            var wind = new ballistic.windInfo(windInfoArguments);
+            shotInfo.setWind(wind);
+
+            var zeroResult = ballistic.shotInfoController.calculateZero(shotInfo);
+            if (check(zeroResult) && zeroResult.isProcessed) {
+                /******************************************************/
+                shotInfo.setElevationAngle(zeroResult.elevationAngle);
+                shotInfo.setMaxDistance(new ballistic.distance(1000, ballistic.distanceUnits.Yard));
+                shotInfo.setStep(new ballistic.distance(25, ballistic.distanceUnits.Yard));
+                shotInfo.setShotAngle(new ballistic.angle(0, ballistic.angleUnits.Radian));
+                shotInfo.setCantAngle(new ballistic.angle(0, ballistic.angleUnits.Radian));
+                shotInfo.setVerticalClick(new ballistic.angle(0.25, ballistic.angleUnits.Moa));
+                shotInfo.setHorizontalClick(new ballistic.angle(0.25, ballistic.angleUnits.Moa));
+                var longRangeResult = ballistic.shotInfoController.calculateShot(shotInfo);
+
+                var collection_1 = longRangeResult.getCollection();
+                QUnit.test("Check calculation Mock 1 length with Calculation result length", function (assert) {
+                    assert.ok(SHOT_INFO_RESULT_MOCK_1.length == collection_1.length, "Passed!");
+                });
+
+                for (var i = 0; i < collection_1.length; i++) {
+                    //Unit tests
+                    var calculateEnergy = collection_1[i].getBulletEnergy().get(ballistic.energyUnits.FootPounds);
+                    var energyDiff = calculateEnergy - SHOT_INFO_RESULT_MOCK_1[i].energy;
+                    QUnit.test("Check energy difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_1[i].energy +
+                                ", calculated value is " + calculateEnergy + ", difference is " + energyDiff + " step #" + i, function (assert) {
+                        assert.ok(energyDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+
+                    var calculateRange = collection_1[i].getRange().get(ballistic.distanceUnits.Yard);
+                    var rangeDiff = calculateRange - SHOT_INFO_RESULT_MOCK_1[i].range;
+                    QUnit.test("Check range difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_1[i].range +
+                    ", calculated value is " + calculateRange + ", difference is " + rangeDiff + " step #" + i, function (assert) {
+                        assert.ok(rangeDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+
+                    var calculateVelocity = collection_1[i].getBulletVelocity().get(ballistic.velocityUnits.FeetPerSecond);
+                    var velocityDiff = calculateVelocity - SHOT_INFO_RESULT_MOCK_1[i].velocity;
+                    QUnit.test("Check velocity difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_1[i].velocity +
+                    ", calculated value is " + calculateVelocity + ", difference is " + velocityDiff + " step #" + i, function (assert) {
+                        assert.ok(velocityDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+                    var calculateMach= collection_1[i].getMach();
+                    var machDiff = calculateMach - SHOT_INFO_RESULT_MOCK_1[i].mach;
+                    QUnit.test("Check mach difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_1[i].mach +
+                    ", calculated value is " + calculateMach + ", difference is " + machDiff + " step #" + i, function (assert) {
+                        assert.ok(machDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+                    var calculatePath = collection_1[i].getPath().get(ballistic.distanceUnits.Inch);
+                    var pathDiff = calculatePath - SHOT_INFO_RESULT_MOCK_1[i].path;
+                    QUnit.test("Check path difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_1[i].path +
+                    ", calculated value is " + calculatePath + ", difference is " + pathDiff + " step #" + i, function (assert) {
+                        assert.ok(pathDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+                    var calculateHold = collection_1[i].getHold().get(ballistic.angleUnits.MilDot);
+                    var holdDiff = calculateHold - SHOT_INFO_RESULT_MOCK_1[i].hold;
+                    QUnit.test("Check hold difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_1[i].hold +
+                    ", calculated value is " + calculateHold + ", difference is " + holdDiff + " step #" + i, function (assert) {
+                        assert.ok(holdDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+                    var calculateWindage = collection_1[i].getWindage().get(ballistic.distanceUnits.Inch);
+                    var windageDiff = calculateWindage - SHOT_INFO_RESULT_MOCK_1[i].windage;
+                    QUnit.test("Check windage difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_1[i].windage +
+                    ", calculated value is " + calculateWindage + ", difference is " + windageDiff + " step #" + i, function (assert) {
+                        assert.ok(windageDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+                    var calculateWindageCor = collection_1[i].getWindageCorrection().get(ballistic.angleUnits.MilDot);
+                    var windageCorDiff = calculateWindageCor - SHOT_INFO_RESULT_MOCK_1[i].windage_adj;
+                    QUnit.test("Check windage cor difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_1[i].windage_adj +
+                    ", calculated value is " + calculateWindageCor + ", difference is " + windageCorDiff + " step #" + i, function (assert) {
+                        assert.ok(windageCorDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+                    var calculateOPT = collection_1[i].getOptimalGameWeight().get(ballistic.weightUnits.Pound);
+                    var OPTDiff = calculateOPT - SHOT_INFO_RESULT_MOCK_1[i].ogm;
+                    QUnit.test("Check windage cor difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_1[i].ogm +
+                    ", calculated value is " + calculateOPT + ", difference is " + OPTDiff + " step #" + i, function (assert) {
+                        assert.ok(OPTDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+                }
+            }
+        </script>
+
+        <!--UNIT TEST SECTION-->
+        <script type="text/javascript">
+            var ballistic = new BallisticCalculator();
+            var isRightHand = $('#lh_rh').val() === "rh";
+
+            var zeroInfo = new ballistic.shotInfoArguments();
+            zeroInfo.name = null;
+            //Ammo
+            var ammoInfoArgs = new ballistic.ammoInfoArguments();
+            ammoInfoArgs.dragTable = 'g1';
+            ammoInfoArgs.ballisticCoefficient = 0.398;
+            ammoInfoArgs.muzzleVelocity = new ballistic.velocity(2780, ballistic.velocityUnits.FeetPerSecond);
+            ammoInfoArgs.bulletWeight = new ballistic.weight(147, ballistic.weightUnits.Grain);
+            zeroInfo.ammo = new ballistic.ammoInfo(ammoInfoArgs);
+
+            //Atmo
+            var atmoInfoArgs = new ballistic.atmosphereInfoArguments();
+            atmoInfoArgs.temperature = new ballistic.temperature(59, ballistic.temperatureUnits.Fahrenheit);
+            atmoInfoArgs.pressure = new ballistic.pressure(29.53, ballistic.pressureUnits.InchHg);
+            atmoInfoArgs.humidity = parseFloat(0.78);
+            atmoInfoArgs.altitude = new ballistic.distance(0, ballistic.distanceUnits.Foot);
+            zeroInfo.atmosphere = new ballistic.atmosphereInfo(atmoInfoArgs);
+            zeroInfo.cantAngle = null;
+            zeroInfo.shotAngle = null;
+            zeroInfo.wind = null;
+            zeroInfo.sightHeight = new ballistic.distance(1.5, ballistic.distanceUnits.Inch);
+            zeroInfo.zeroDistance = new ballistic.distance(100, ballistic.distanceUnits.Yard);
+            zeroInfo.nearZero = $('#nearZero').val() === "true";
+            zeroInfo.driftInfo = null;
+            zeroInfo.elevationAngle = null;
+
+            zeroInfo.step = 1;
+
+            zeroInfo.verticalClick = new ballistic.angle(0.25, ballistic.angleUnits.Moa);
+            zeroInfo.horizontalClick = new ballistic.angle(0.25, ballistic.angleUnits.Moa);
+
+            zeroInfo.targetSize = null;
+            zeroInfo.clicks = parseFloat(0);
+            //
+            var shotInfo = new ballistic.shotInfo(zeroInfo);
+            var windInfoArguments = new ballistic.windInfoArguments();
+            windInfoArguments.direction = new ballistic.angle(0, ballistic.angleUnits.Radian);
+            windInfoArguments.speed = new ballistic.velocity(0, ballistic.velocityUnits.MilesPerHour);
+            var wind = new ballistic.windInfo(windInfoArguments);
+            shotInfo.setWind(wind);
+
+            var zeroResult = ballistic.shotInfoController.calculateZero(shotInfo);
+            if (check(zeroResult) && zeroResult.isProcessed) {
+                /******************************************************/
+                shotInfo.setElevationAngle(zeroResult.elevationAngle);
+                shotInfo.setMaxDistance(new ballistic.distance(1000, ballistic.distanceUnits.Yard));
+                shotInfo.setStep(new ballistic.distance(25, ballistic.distanceUnits.Yard));
+                shotInfo.setShotAngle(new ballistic.angle(0, ballistic.angleUnits.Radian));
+                shotInfo.setCantAngle(new ballistic.angle(0, ballistic.angleUnits.Radian));
+                shotInfo.setVerticalClick(new ballistic.angle(0.25, ballistic.angleUnits.Moa));
+                shotInfo.setHorizontalClick(new ballistic.angle(0.25, ballistic.angleUnits.Moa));
+                var driftInfoArg = new ballistic.driftInfoArguments();
+                driftInfoArg.bulletLength = new ballistic.distance(1.16, ballistic.distanceUnits.Inch);
+                driftInfoArg.bulletDiameter = new ballistic.distance(0.308, ballistic.distanceUnits.Inch);
+                driftInfoArg.riflingTwist = new ballistic.distance(0.00024, ballistic.distanceUnits.Kilometer);
+                driftInfoArg.rightHandTwist = true;
+                shotInfo.setDriftInfo(new ballistic.driftInfo(driftInfoArg));
+
+                var longRangeResult = ballistic.shotInfoController.calculateShot(shotInfo);
+
+                var collection_1 = longRangeResult.getCollection();
+                QUnit.test("Check calculation Mock 1 length with Calculation result length", function (assert) {
+                    assert.ok(SHOT_INFO_RESULT_MOCK_DRIFT_RH.length == collection_1.length, "Passed!");
+                });
+
+                for (var i = 0; i < collection_1.length; i++) {
+                    //Unit tests
+                    var calculateEnergy = collection_1[i].getBulletEnergy().get(ballistic.energyUnits.FootPounds);
+                    var energyDiff = calculateEnergy - SHOT_INFO_RESULT_MOCK_DRIFT_RH[i].energy;
+                    QUnit.test("Check energy difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_DRIFT_RH[i].energy +
+                    ", calculated value is " + calculateEnergy + ", difference is " + energyDiff + " step #" + i, function (assert) {
+                        assert.ok(energyDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+
+                    var calculateRange = collection_1[i].getRange().get(ballistic.distanceUnits.Yard);
+                    var rangeDiff = calculateRange - SHOT_INFO_RESULT_MOCK_DRIFT_RH[i].range;
+                    QUnit.test("Check range difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_DRIFT_RH[i].range +
+                    ", calculated value is " + calculateRange + ", difference is " + rangeDiff + " step #" + i, function (assert) {
+                        assert.ok(rangeDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+
+                    var calculateVelocity = collection_1[i].getBulletVelocity().get(ballistic.velocityUnits.FeetPerSecond);
+                    var velocityDiff = calculateVelocity - SHOT_INFO_RESULT_MOCK_DRIFT_RH[i].velocity;
+                    QUnit.test("Check velocity difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_DRIFT_RH[i].velocity +
+                    ", calculated value is " + calculateVelocity + ", difference is " + velocityDiff + " step #" + i, function (assert) {
+                        assert.ok(velocityDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+                    var calculateMach= collection_1[i].getMach();
+                    var machDiff = calculateMach - SHOT_INFO_RESULT_MOCK_DRIFT_RH[i].mach;
+                    QUnit.test("Check mach difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_DRIFT_RH[i].mach +
+                    ", calculated value is " + calculateMach + ", difference is " + machDiff + " step #" + i, function (assert) {
+                        assert.ok(machDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+                    var calculatePath = collection_1[i].getPath().get(ballistic.distanceUnits.Inch);
+                    var pathDiff = calculatePath - SHOT_INFO_RESULT_MOCK_DRIFT_RH[i].path;
+                    QUnit.test("Check path difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_DRIFT_RH[i].path +
+                    ", calculated value is " + calculatePath + ", difference is " + pathDiff + " step #" + i, function (assert) {
+                        assert.ok(pathDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+                    var calculateHold = collection_1[i].getHold().get(ballistic.angleUnits.MilDot);
+                    var holdDiff = calculateHold - SHOT_INFO_RESULT_MOCK_DRIFT_RH[i].hold;
+                    QUnit.test("Check hold difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_DRIFT_RH[i].hold +
+                    ", calculated value is " + calculateHold + ", difference is " + holdDiff + " step #" + i, function (assert) {
+                        assert.ok(holdDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+                    var calculateWindage = collection_1[i].getWindage().get(ballistic.distanceUnits.Inch);
+                    var windageDiff = calculateWindage - SHOT_INFO_RESULT_MOCK_DRIFT_RH[i].windage;
+                    QUnit.test("Check windage difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_DRIFT_RH[i].windage +
+                    ", calculated value is " + calculateWindage + ", difference is " + windageDiff + " step #" + i, function (assert) {
+                        assert.ok(windageDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+                    var calculateWindageCor = collection_1[i].getWindageCorrection().get(ballistic.angleUnits.MilDot);
+                    var windageCorDiff = calculateWindageCor - SHOT_INFO_RESULT_MOCK_DRIFT_RH[i].windage_adj;
+                    QUnit.test("Check windage cor difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_DRIFT_RH[i].windage_adj +
+                    ", calculated value is " + calculateWindageCor + ", difference is " + windageCorDiff + " step #" + i, function (assert) {
+                        assert.ok(windageCorDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+                    var calculateOPT = collection_1[i].getOptimalGameWeight().get(ballistic.weightUnits.Pound);
+                    var OPTDiff = calculateOPT - SHOT_INFO_RESULT_MOCK_DRIFT_RH[i].ogm;
+                    QUnit.test("Check windage cor difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_DRIFT_RH[i].ogm +
+                    ", calculated value is " + calculateOPT + ", difference is " + OPTDiff + " step #" + i, function (assert) {
+                        assert.ok(OPTDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+                }
+            }
+        </script>
+
+
+
+        <!--UNIT TEST SECTION-->
+        <script type="text/javascript">
+            var ballistic = new BallisticCalculator();
+            var isRightHand = $('#lh_rh').val() === "rh";
+
+            var zeroInfo = new ballistic.shotInfoArguments();
+            zeroInfo.name = null;
+            //Ammo
+            var ammoInfoArgs = new ballistic.ammoInfoArguments();
+            ammoInfoArgs.dragTable = 'g1';
+            ammoInfoArgs.ballisticCoefficient = 0.398;
+            ammoInfoArgs.muzzleVelocity = new ballistic.velocity(2780, ballistic.velocityUnits.FeetPerSecond);
+            ammoInfoArgs.bulletWeight = new ballistic.weight(147, ballistic.weightUnits.Grain);
+            zeroInfo.ammo = new ballistic.ammoInfo(ammoInfoArgs);
+
+            //Atmo
+            var atmoInfoArgs = new ballistic.atmosphereInfoArguments();
+            atmoInfoArgs.temperature = new ballistic.temperature(59, ballistic.temperatureUnits.Fahrenheit);
+            atmoInfoArgs.pressure = new ballistic.pressure(29.53, ballistic.pressureUnits.InchHg);
+            atmoInfoArgs.humidity = parseFloat(0.78);
+            atmoInfoArgs.altitude = new ballistic.distance(0, ballistic.distanceUnits.Foot);
+            zeroInfo.atmosphere = new ballistic.atmosphereInfo(atmoInfoArgs);
+            zeroInfo.cantAngle = null;
+            zeroInfo.shotAngle = null;
+            zeroInfo.wind = null;
+            zeroInfo.sightHeight = new ballistic.distance(1.5, ballistic.distanceUnits.Inch);
+            zeroInfo.zeroDistance = new ballistic.distance(100, ballistic.distanceUnits.Yard);
+            zeroInfo.nearZero = $('#nearZero').val() === "true";
+            zeroInfo.driftInfo = null;
+            zeroInfo.elevationAngle = null;
+
+            zeroInfo.step = 1;
+
+            zeroInfo.verticalClick = new ballistic.angle(0.25, ballistic.angleUnits.Moa);
+            zeroInfo.horizontalClick = new ballistic.angle(0.25, ballistic.angleUnits.Moa);
+
+            zeroInfo.targetSize = null;
+            zeroInfo.clicks = parseFloat(0);
+            //
+            var shotInfo = new ballistic.shotInfo(zeroInfo);
+            var windInfoArguments = new ballistic.windInfoArguments();
+            windInfoArguments.direction = new ballistic.angle(0, ballistic.angleUnits.Radian);
+            windInfoArguments.speed = new ballistic.velocity(0, ballistic.velocityUnits.MilesPerHour);
+            var wind = new ballistic.windInfo(windInfoArguments);
+            shotInfo.setWind(wind);
+
+            var zeroResult = ballistic.shotInfoController.calculateZero(shotInfo);
+            if (check(zeroResult) && zeroResult.isProcessed) {
+                /******************************************************/
+                shotInfo.setElevationAngle(zeroResult.elevationAngle);
+                shotInfo.setMaxDistance(new ballistic.distance(1000, ballistic.distanceUnits.Yard));
+                shotInfo.setStep(new ballistic.distance(25, ballistic.distanceUnits.Yard));
+                shotInfo.setShotAngle(new ballistic.angle(0, ballistic.angleUnits.Radian));
+                shotInfo.setCantAngle(new ballistic.angle(0, ballistic.angleUnits.Radian));
+                shotInfo.setVerticalClick(new ballistic.angle(0.25, ballistic.angleUnits.Moa));
+                shotInfo.setHorizontalClick(new ballistic.angle(0.25, ballistic.angleUnits.Moa));
+                var driftInfoArg = new ballistic.driftInfoArguments();
+                driftInfoArg.bulletLength = new ballistic.distance(1.16, ballistic.distanceUnits.Inch);
+                driftInfoArg.bulletDiameter = new ballistic.distance(0.308, ballistic.distanceUnits.Inch);
+                driftInfoArg.riflingTwist = new ballistic.distance(0.00024, ballistic.distanceUnits.Kilometer);
+                driftInfoArg.rightHandTwist = false;
+                shotInfo.setDriftInfo(new ballistic.driftInfo(driftInfoArg));
+
+                var longRangeResult = ballistic.shotInfoController.calculateShot(shotInfo);
+
+                var collection_1 = longRangeResult.getCollection();
+                QUnit.test("Check calculation Mock 1 length with Calculation result length", function (assert) {
+                    assert.ok(SHOT_INFO_RESULT_MOCK_DRIFT_LH.length == collection_1.length, "Passed!");
+                });
+
+                for (var i = 0; i < collection_1.length; i++) {
+                    //Unit tests
+                    var calculateEnergy = collection_1[i].getBulletEnergy().get(ballistic.energyUnits.FootPounds);
+                    var energyDiff = calculateEnergy - SHOT_INFO_RESULT_MOCK_DRIFT_LH[i].energy;
+                    QUnit.test("Check energy difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_DRIFT_LH[i].energy +
+                    ", calculated value is " + calculateEnergy + ", difference is " + energyDiff + " step #" + i, function (assert) {
+                        assert.ok(energyDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+
+                    var calculateRange = collection_1[i].getRange().get(ballistic.distanceUnits.Yard);
+                    var rangeDiff = calculateRange - SHOT_INFO_RESULT_MOCK_DRIFT_LH[i].range;
+                    QUnit.test("Check range difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_DRIFT_LH[i].range +
+                    ", calculated value is " + calculateRange + ", difference is " + rangeDiff + " step #" + i, function (assert) {
+                        assert.ok(rangeDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+
+                    var calculateVelocity = collection_1[i].getBulletVelocity().get(ballistic.velocityUnits.FeetPerSecond);
+                    var velocityDiff = calculateVelocity - SHOT_INFO_RESULT_MOCK_DRIFT_LH[i].velocity;
+                    QUnit.test("Check velocity difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_DRIFT_LH[i].velocity +
+                    ", calculated value is " + calculateVelocity + ", difference is " + velocityDiff + " step #" + i, function (assert) {
+                        assert.ok(velocityDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+                    var calculateMach= collection_1[i].getMach();
+                    var machDiff = calculateMach - SHOT_INFO_RESULT_MOCK_DRIFT_LH[i].mach;
+                    QUnit.test("Check mach difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_DRIFT_LH[i].mach +
+                    ", calculated value is " + calculateMach + ", difference is " + machDiff + " step #" + i, function (assert) {
+                        assert.ok(machDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+                    var calculatePath = collection_1[i].getPath().get(ballistic.distanceUnits.Inch);
+                    var pathDiff = calculatePath - SHOT_INFO_RESULT_MOCK_DRIFT_LH[i].path;
+                    QUnit.test("Check path difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_DRIFT_LH[i].path +
+                    ", calculated value is " + calculatePath + ", difference is " + pathDiff + " step #" + i, function (assert) {
+                        assert.ok(pathDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+                    var calculateHold = collection_1[i].getHold().get(ballistic.angleUnits.MilDot);
+                    var holdDiff = calculateHold - SHOT_INFO_RESULT_MOCK_DRIFT_LH[i].hold;
+                    QUnit.test("Check hold difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_DRIFT_LH[i].hold +
+                    ", calculated value is " + calculateHold + ", difference is " + holdDiff + " step #" + i, function (assert) {
+                        assert.ok(holdDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+                    var calculateWindage = collection_1[i].getWindage().get(ballistic.distanceUnits.Inch);
+                    var windageDiff = calculateWindage - SHOT_INFO_RESULT_MOCK_DRIFT_LH[i].windage;
+                    QUnit.test("Check windage difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_DRIFT_LH[i].windage +
+                    ", calculated value is " + calculateWindage + ", difference is " + windageDiff + " step #" + i, function (assert) {
+                        assert.ok(windageDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+                    var calculateWindageCor = collection_1[i].getWindageCorrection().get(ballistic.angleUnits.MilDot);
+                    var windageCorDiff = calculateWindageCor - SHOT_INFO_RESULT_MOCK_DRIFT_LH[i].windage_adj;
+                    QUnit.test("Check windage cor difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_DRIFT_LH[i].windage_adj +
+                    ", calculated value is " + calculateWindageCor + ", difference is " + windageCorDiff + " step #" + i, function (assert) {
+                        assert.ok(windageCorDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+                    var calculateOPT = collection_1[i].getOptimalGameWeight().get(ballistic.weightUnits.Pound);
+                    var OPTDiff = calculateOPT - SHOT_INFO_RESULT_MOCK_DRIFT_LH[i].ogm;
+                    QUnit.test("Check windage cor difference, Rounded MOCK value is " + SHOT_INFO_RESULT_MOCK_DRIFT_LH[i].ogm +
+                    ", calculated value is " + calculateOPT + ", difference is " + OPTDiff + " step #" + i, function (assert) {
+                        assert.ok(OPTDiff < ROUNDED_REFERENT_VALUE, "Passed!");
+                    });
+
+                }
+            }
+        </script>
+    </body>
+</html>

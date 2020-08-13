@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Labels -->
+    <string name="lbl_MainActivity">Ballistic Calculator</string>
+    <string name="lbl_EditTraceActivity">Edit Trace</string>
+    
+    <!-- Main menu buttons -->
+    <string name="btn_lbl_SelectTrace">Select Trace</string>
+    <string name="btn_lbl_SetAtmosphere">Set Atmosphere</string>
+    <string name="btn_lbl_SetWind">Set Wind</string>
+    <string name="btn_lbl_BallisticTable">Ballistic Table</string>
+    <string name="btn_lbl_SingleShot">Single Shot</string>
+    <string name="btn_lbl_CommunicateDesktop">Communicate Desktop</string>
+    <string name="btn_lbl_Settings">Settings</string>
+
+    <!-- Select Trace menu buttons -->
+    <string name="btn_lbl_Select">Select</string>
+    <string name="btn_lbl_Add">Add</string>
+    <string name="btn_lbl_Edit">Edit</string>
+    <string name="btn_lbl_Cancel">Cancel</string>
+
+    <!-- Ballistic Table header labels -->
+    <string name="tv_lbl_Range">Range</string>
+    <string name="tv_lbl_Velocity">Velocity</string>
+    <string name="tv_lbl_Mach">Mach</string>
+    <string name="tv_lbl_Energy">Energy</string>
+    <string name="tv_lbl_Path">Path</string>
+    <string name="tv_lbl_Hold">Hold</string>
+    <string name="tv_lbl_Clicks">Clicks</string>
+    <string name="tv_lbl_Windage">Windage</string>
+    <string name="tv_lbl_WindAdjustment">Win. Adj.</string>
+    <string name="tv_lbl_FlightTime">Flight Time</string>
+    <string name="tv_lbl_OGW">O.G.W.</string>
+
+    <!-- Single Shot menu labels -->
+    <string name="tv_lbl_Wind">Wind</string>
+    <string name="tv_lbl_WindDirectionClock">Dir\n(clock)</string>
+    <string name="btn_lbl_Calculate">Calculate Shot</string>
+    <string name="tv_lbl_ElevationV">E\nL\nE\nV</string>
+    <string name="tv_lbl_WindV">W\nI\nN\nD</string>
+
+    <!-- Communicate Desktop menu -->
+    <string name="edit_hint_DesktopAdress">Desktop Address</string>
+    <string name="edit_hint_DesktopPort">Port</string>
+    <string name="rb_lbl_JoinTraces">Join Traces</string>
+    <string name="rb_lbl_ReplaceTraces">Replace Traces</string>
+    <string name="btn_lbl_Communicate">Communicate</string>
+    <string name="btn_lbl_Back">Back</string>
+    
+    <!-- Settings menu-->
+    <string name="btn_lbl_ChooseUnits">Choose units</string>
+
+    <!-- Units -->
+    <string name="dd_prompt_Units">Choose units</string>
+    <string-array name="dd_lbls_Units">
+        <item>Imperial</item>
+        <item>Metric</item>
+    </string-array>
+
+    <string-array name="dd_lbls_Distance_metric">
+        <item>Millimeter (mm)</item>
+        <item>Centimeter (cm)</item>
+        <item>Meter (m)</item>
+        <item>Kilometer (km)</item>
+    </string-array>
+    <string-array name="dd_lbls_Distance_imperial">
+        <item>Inch (in)</item>
+        <item>Foot (ft)</item>
+        <item>Yard (yd)</item>
+        <item>Mile (mi)</item>
+    </string-array>
+
+    <string-array name="dd_lbls_Velocity_metric">
+        <item>Meter Per Second (m/s)</item>
+        <item>Kilometer Per Hour (km/h)</item>
+    </string-array>
+    <string-array name="dd_lbls_Velocity_imperial">
+        <item>Feet Per Second (ft/s)</item>
+        <item>Mile Per Hour (mi/h)</item>
+    </string-array>
+
+    <string-array name="dd_lbls_Weight_metric">
+        <item>Gram (g)</item>
+        <item>Kilogram (kg)</item>
+    </string-array>
+    <string-array name="dd_lbls_Weight_imperial">
+        <item>Grain (gr)</item>
+        <item>Pound (lb)</item>
+    </string-array>
+
+    <string-array name="dd_lbls_Drag_Table">
+        <item>G1</item>
+        <item>G2</item>
+        <item>G5</item>
+        <item>G6</item>
+        <item>G7</item>
+        <item>G8</item>
+        <item>GL</item>
+        <item>GI</item>
+    </string-array>
+
+    <string-array name="dd_lbls_Angle_imperial">
+        <item>Radian (rad)</item>
+        <item>Degree (°)</item>
+        <item>Moa (moa)</item>
+        <item>Mil (mil)</item>
+        <item>AMil (am)</item>
+        <item>Mil-Dot (mdot)</item>
+        <item>In Per 100 Yards (in/100y)</item>
+    </string-array>
+    <string-array name="dd_lbls_Angle_metric">
+        <item>Radian (rad)</item>
+        <item>Degree (°)</item>
+        <item>Moa (moa)</item>
+        <item>Mil (mil)</item>
+        <item>AMil (am)</item>
+        <item>Mil-Dot (mdot)</item>
+        <item>Cm Per 100 Meters (cm/100m)</item>
+    </string-array>
+
+    <string-array name="dd_lbls_Pressure_imperial">
+        <item>Inch Of Mercury (inHg)</item>
+        <item>Bar (bar)</item>
+        <item>Hectopascal (hPa)</item>
+    </string-array>
+    <string-array name="dd_lbls_Pressure_metric">
+        <item>Millimeter Of Mercury (mmHg)</item>
+        <item>Bar (bar)</item>
+        <item>Hectopascal (hPa)</item>
+    </string-array>
+
+    <string-array name="dd_lbls_Temperature_imperial">
+        <item>Fahrenheit (°F)</item>
+    </string-array>
+    <string-array name="dd_lbls_Temperature_metric">
+        <item>Celsius (°C)</item>
+    </string-array>
+
+    <string-array name="dd_lbls_Energy_imperial">
+        <item>Foot-Pound (ft·lb)</item>
+    </string-array>
+    <string-array name="dd_lbls_Energy_metric">
+        <item>Joule (J)</item>
+    </string-array>
+
+    <!-- Edit Trace -->
+    <string name="edit_hint_TraceName">Trace Name</string>
+    <string name="edit_hint_BulletWeight">Bullet Weight</string>
+    <string name="edit_hint_MuzzleVelocity">Muzzle Velocity</string>
+    <string name="edit_hint_BallisticCoefficient">Ballistic Coefficient</string>
+    <string name="edit_hint_ZeroDistance">Zero Distance</string>
+    <string name="edit_hint_ZeroHeight">Sight Height</string>
+    <string name="edit_hint_ZeroElevationAngle">Zero Elevation Angle</string>
+    <string name="cb_lbl_CalculateSpinDrift">Calculate Spin Drift</string>
+    <string name="edit_hint_BulletDiameter">Bullet Diameter</string>
+    <string name="edit_hint_BulletLength">Bullet Length</string>
+    <string name="edit_hint_Rifling">Rifling</string>
+    <string name="rb_lbl_RiflingLeftHand">Left Hand</string>
+    <string name="rb_lbl_RiflingRightHand">Right Hand</string>
+    <string name="edit_hint_VerticalClick">Vertical Click</string>
+    <string name="edit_hint_HorizontalClick">Horizontal Click</string>
+    <string name="btn_lbl_Save">Save</string>
+
+    <!-- Edit Wind -->
+    <string name="edit_hint_WindSpeed">Wind Speed</string>
+    <string name="edit_hint_WindDirection">Wind Direction</string>
+    <string name="btn_lbl_BeaufortChart">Beaufort Chart</string>
+    <string name="btn_lbl_Continue">Continue</string>
+
+    <!-- Edit Atmosphere -->
+    <string name="edit_hint_Altitude">Altitude</string>
+    <string name="edit_hint_Pressure">Pressure</string>
+    <string name="edit_hint_Temperature">Temperature</string>
+    <string name="edit_hint_Humidity">Humidity</string>
+    
+    <string name="btn_lbl_UseSensors">Use Device Sensors</string>
+    <string name="btn_lbl_StopUsingSensors">Stop Using Device Sensors</string>
+
+    <string-array name="dd_lblsBeaufortWindScaleDescription">
+        <item>Calm, smoke rises vertically</item>
+        <item>Smoke drift indicates wind direction, still wind vanes</item>
+        <item>Wind felt on face, leaves rustle, vanes begin to move</item>
+        <item>Leaves and small twigs constantly moving, light flags extended</item>
+        <item>Dust, leaves, and loose paper lifted, small tree branches move</item>
+        <item>Small trees in leaf begin to sway</item>
+        <item>Larger tree branches moving, whistling in wires</item>
+        <item>Whole trees moving, resistance felt walking against wind</item>
+        <item>Twigs breaking off trees, generally impedes progress</item>
+        <item>Slight structural damage occurs, slate blows off roofs</item>
+        <item>Trees broken or uprooted, considerable structural damage</item>
+        <item>Widespread damage</item>
+        <item>Devastation</item>
+    </string-array>
+
+    <string-array name="dd_lblsBeaufortWindScale">
+        <item>Calm</item>
+        <item>Light Air</item>
+        <item>Light Breeze</item>
+        <item>Gentle Breeze</item>
+        <item>Moderate Breeze</item>
+        <item>Fresh Breeze</item>
+        <item>Strong Breeze</item>
+        <item>Near Gale</item>
+        <item>Gale</item>
+        <item>Strong Gale</item>
+        <item>Storm</item>
+        <item>Violent Storm</item>
+        <item>Hurricane</item>
+    </string-array>
+
+    <!-- Messages -->
+    <string name="msg_TraceNotSelected">No trace selected! Please select trace and try again.</string>
+    <string name="msg_PressBackToExit">Press Back again to exit.</string>
+    <string name="msg_SensorWaitTimeout">Waiting for sensors timeout.</string>
+    <string name="msg_TowardTarget">Orient phone top towards the target</string>
+    <string name="msg_AgainstWind">Orient phone top against the wind</string>
+    <string name="msg_InvalidUri">Invalid desktop address or port!</string>
+    <string name="msg_LoadedNTraces">Loaded {0} traces!</string>
+    <string name="msg_LoadTracesFail1">Failed to load traces! [1]</string>
+    <string name="msg_LoadTracesFail2">Failed to load traces! [2]</string>
+</resources>

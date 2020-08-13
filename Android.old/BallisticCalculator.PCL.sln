@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BallisticCalculator.PCL", "BallisticCalculator.PCL.csproj", "{3B868A1E-F1F0-4346-AB42-0CD0FA832009}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Math.PCL", "Projects\Math.PCL.csproj", "{B0911DE6-9606-4FB4-9264-D54EF5378D7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serialization.PCL", "Projects\Serialization.PCL.csproj", "{36F3DAD6-7708-444F-B3FB-63C0F51FF07A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Connectivity.PCL", "Projects\Connectivity.PCL.csproj", "{DC663AB6-E243-4730-A917-F72C4A17ACA6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3B868A1E-F1F0-4346-AB42-0CD0FA832009}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B868A1E-F1F0-4346-AB42-0CD0FA832009}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B868A1E-F1F0-4346-AB42-0CD0FA832009}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{3B868A1E-F1F0-4346-AB42-0CD0FA832009}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B868A1E-F1F0-4346-AB42-0CD0FA832009}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0911DE6-9606-4FB4-9264-D54EF5378D7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0911DE6-9606-4FB4-9264-D54EF5378D7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0911DE6-9606-4FB4-9264-D54EF5378D7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0911DE6-9606-4FB4-9264-D54EF5378D7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36F3DAD6-7708-444F-B3FB-63C0F51FF07A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36F3DAD6-7708-444F-B3FB-63C0F51FF07A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36F3DAD6-7708-444F-B3FB-63C0F51FF07A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36F3DAD6-7708-444F-B3FB-63C0F51FF07A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC663AB6-E243-4730-A917-F72C4A17ACA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC663AB6-E243-4730-A917-F72C4A17ACA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC663AB6-E243-4730-A917-F72C4A17ACA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC663AB6-E243-4730-A917-F72C4A17ACA6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Velocity Unit Tests</title>
+        <script src="../../3rd_party/jquery-1.11.3.js"></script>
+        <script src="../../3rd_party/qunit/qunit-1.20.0.js"></script>
+        <script src="../../Math/ballistic.js"></script>
+        <script src="../js/help.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="../../3rd_party/qunit/qunit.css">
+        <style>
+            body {
+                background-color: #bebdbb;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="margin: 15px">
+            <a style="font-size: 25px; text-decoration: none; color: #0D3349;" href="../index.html"> << Back</a>
+        </div>
+        <div style="margin: 15px; color: #0D3349; font-size: 25px;"> Referent value is: <script type="text/javascript">document.write(REFERENT_VALUE.toString());</script></div>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+
+        <!--UNIT TEST SECTION-->
+        <script type="text/javascript">
+
+            var DESKTOP_VELOCITY_FT_S = 2780;
+            var DESKTOP_VELOCITY_MI_H = 1895.45454083267;
+            var DESKTOP_VELOCITY_M_S = 847.343998712037;
+            var DESKTOP_VELOCITY_KM_H = 3050.43839536333;
+
+
+            var ballistic = new BallisticCalculator();
+
+            var velocityFtS = new ballistic.velocity(2780, ballistic.velocityUnits.FeetPerSecond);
+            var velocityMiH = new ballistic.velocity(1895.4545408326692, ballistic.velocityUnits.MilesPerHour);
+            var velocityMS = new ballistic.velocity(847.3439987120371, ballistic.velocityUnits.MeterPerSecond);
+            var velocityKmH = new ballistic.velocity(3050.4383953633337, ballistic.velocityUnits.KilometersPerHour);
+
+
+            //Unit tests
+            QUnit.test( "Ballistic calculator instance check", function(assert) {
+                assert.ok( check(ballistic), "Passed!" );
+            });
+
+            QUnit.test( "Velocity feet Per Second instance check", function(assert) {
+                assert.ok( check(velocityFtS), "Passed!" );
+            });
+
+            QUnit.test( "Velocity miles Per Hour instance check", function(assert) {
+                assert.ok( check(velocityMiH), "Passed!" );
+            });
+
+            QUnit.test( "Velocity meter Per Second instance check", function(assert) {
+                assert.ok( check(velocityMS), "Passed!" );
+            });
+
+            QUnit.test( "Velocity kilometers Per Hour instance check", function(assert) {
+                assert.ok( check(velocityKmH), "Passed!" );
+            });
+
+            /*****************Check With Reference Values****************/
+
+            QUnit.test( "Check Velocity feet Per Second with desktop value", function(assert) {
+                var result = velocityFtS.get(ballistic.velocityUnits.FeetPerSecond) - DESKTOP_VELOCITY_FT_S;
+                assert.ok( result < REFERENT_VALUE, "Passed! Desktop value is: " + DESKTOP_VELOCITY_FT_S + ", JS value is: " + velocityFtS.get(ballistic.velocityUnits.FeetPerSecond)
+                + ", Difference is: " + result );
+            });
+
+            QUnit.test( "Check Velocity miles Per Hour with desktop value", function(assert) {
+                var result = velocityMiH.get(ballistic.velocityUnits.MilesPerHour) - DESKTOP_VELOCITY_MI_H;
+                assert.ok( result < REFERENT_VALUE, "Passed! Desktop value is: " + DESKTOP_VELOCITY_MI_H + ", JS value is: " + velocityMiH.get(ballistic.velocityUnits.MilesPerHour)
+                + ", Difference is: " + result );
+            });
+
+            QUnit.test( "Check Velocity meter Per Second with desktop value", function(assert) {
+                var result = velocityMS.get(ballistic.velocityUnits.MeterPerSecond) - DESKTOP_VELOCITY_M_S;
+                assert.ok( result < REFERENT_VALUE, "Passed! Desktop value is: " + DESKTOP_VELOCITY_M_S + ", JS value is: " + velocityMS.get(ballistic.velocityUnits.MeterPerSecond)
+                + ", Difference is: " + result );
+            });
+
+            QUnit.test( "Check Velocity kilometers Per Hour with desktop value", function(assert) {
+                var result = velocityKmH.get(ballistic.velocityUnits.KilometersPerHour) - DESKTOP_VELOCITY_KM_H;
+                assert.ok( result < REFERENT_VALUE, "Passed! Desktop value is: " + DESKTOP_VELOCITY_KM_H + ", JS value is: " + velocityKmH.get(ballistic.velocityUnits.KilometersPerHour)
+                + ", Difference is: " + result );
+            });
+
+            //Convert check
+            //Velocity feet Per Second to
+            QUnit.test( "Check convert Velocity feet Per Second to Velocity feet Per Second", function(assert) {
+                var convertResult = ballistic.velocityLogic.convert(DESKTOP_VELOCITY_FT_S, ballistic.velocityUnits.FeetPerSecond, ballistic.velocityUnits.FeetPerSecond);
+                var result = convertResult - DESKTOP_VELOCITY_FT_S;
+                assert.ok( result < REFERENT_VALUE, "Passed Velocity feet Per Second value is: " + DESKTOP_VELOCITY_FT_S + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_VELOCITY_FT_S + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert Velocity feet Per Second to Velocity miles Per Hour", function(assert) {
+                var convertResult = ballistic.velocityLogic.convert(DESKTOP_VELOCITY_FT_S, ballistic.velocityUnits.FeetPerSecond, ballistic.velocityUnits.MilesPerHour);
+                var result = convertResult - DESKTOP_VELOCITY_MI_H;
+                assert.ok( result < REFERENT_VALUE, "Passed Velocity feet Per Second value is: " + DESKTOP_VELOCITY_FT_S + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_VELOCITY_MI_H + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert Velocity feet Per Second to Velocity meter Per Second", function(assert) {
+                var convertResult = ballistic.velocityLogic.convert(DESKTOP_VELOCITY_FT_S, ballistic.velocityUnits.FeetPerSecond, ballistic.velocityUnits.MeterPerSecond);
+                var result = convertResult - DESKTOP_VELOCITY_M_S;
+                assert.ok( result < REFERENT_VALUE, "Passed Velocity feet Per Second value is: " + DESKTOP_VELOCITY_FT_S + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_VELOCITY_M_S + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert Velocity feet Per Second to Velocity kilometers Per Hour", function(assert) {
+                var convertResult = ballistic.velocityLogic.convert(DESKTOP_VELOCITY_FT_S, ballistic.velocityUnits.FeetPerSecond, ballistic.velocityUnits.KilometersPerHour);
+                var result = convertResult - DESKTOP_VELOCITY_KM_H;
+                assert.ok( result < REFERENT_VALUE, "Passed Velocity feet Per Second value is: " + DESKTOP_VELOCITY_FT_S + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_VELOCITY_KM_H + " ) value is: " + result);
+            });
+
+
+
+            //Velocity miles Per Hour to
+            QUnit.test( "Check convert Velocity miles Per Hour to Velocity feet Per Second", function(assert) {
+                var convertResult = ballistic.velocityLogic.convert(DESKTOP_VELOCITY_MI_H, ballistic.velocityUnits.MilesPerHour, ballistic.velocityUnits.FeetPerSecond);
+                var result = convertResult - DESKTOP_VELOCITY_FT_S;
+                assert.ok( result < REFERENT_VALUE, "Passed Velocity miles Per Hour value is: " + DESKTOP_VELOCITY_MI_H + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_VELOCITY_FT_S + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert Velocity miles Per Hour to Velocity miles Per Hour", function(assert) {
+                var convertResult = ballistic.velocityLogic.convert(DESKTOP_VELOCITY_MI_H, ballistic.velocityUnits.MilesPerHour, ballistic.velocityUnits.MilesPerHour);
+                var result = convertResult - DESKTOP_VELOCITY_MI_H;
+                assert.ok( result < REFERENT_VALUE, "Passed Velocity miles Per Hour value is: " + DESKTOP_VELOCITY_MI_H + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_VELOCITY_MI_H + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert Velocity miles Per Hour to Velocity meter Per Second", function(assert) {
+                var convertResult = ballistic.velocityLogic.convert(DESKTOP_VELOCITY_MI_H, ballistic.velocityUnits.MilesPerHour, ballistic.velocityUnits.MeterPerSecond);
+                var result = convertResult - DESKTOP_VELOCITY_M_S;
+                assert.ok( result < REFERENT_VALUE, "Passed Velocity miles Per Hour value is: " + DESKTOP_VELOCITY_MI_H + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_VELOCITY_M_S + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert Velocity miles Per Hour to Velocity kilometers Per Hour", function(assert) {
+                var convertResult = ballistic.velocityLogic.convert(DESKTOP_VELOCITY_MI_H, ballistic.velocityUnits.MilesPerHour, ballistic.velocityUnits.KilometersPerHour);
+                var result = convertResult - DESKTOP_VELOCITY_KM_H;
+                assert.ok( result < REFERENT_VALUE, "Passed Velocity miles Per Hour value is: " + DESKTOP_VELOCITY_MI_H + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_VELOCITY_KM_H + " ) value is: " + result);
+            });
+
+
+            //Velocity meter Per Second to
+            QUnit.test( "Check convert Velocity meter Per Second to Velocity feet Per Second", function(assert) {
+                var convertResult = ballistic.velocityLogic.convert(DESKTOP_VELOCITY_M_S, ballistic.velocityUnits.MeterPerSecond, ballistic.velocityUnits.FeetPerSecond);
+                var result = convertResult - DESKTOP_VELOCITY_FT_S;
+                assert.ok( result < REFERENT_VALUE, "Passed Velocity meter Per Second value is: " + DESKTOP_VELOCITY_M_S + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_VELOCITY_FT_S + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert Velocity meter Per Second to Velocity miles Per Hour", function(assert) {
+                var convertResult = ballistic.velocityLogic.convert(DESKTOP_VELOCITY_M_S, ballistic.velocityUnits.MeterPerSecond, ballistic.velocityUnits.MilesPerHour);
+                var result = convertResult - DESKTOP_VELOCITY_MI_H;
+                assert.ok( result < REFERENT_VALUE, "Passed Velocity meter Per Second value is: " + DESKTOP_VELOCITY_M_S + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_VELOCITY_MI_H + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert Velocity meter Per Second to Velocity meter Per Second", function(assert) {
+                var convertResult = ballistic.velocityLogic.convert(DESKTOP_VELOCITY_M_S, ballistic.velocityUnits.MeterPerSecond, ballistic.velocityUnits.MeterPerSecond);
+                var result = convertResult - DESKTOP_VELOCITY_M_S;
+                assert.ok( result < REFERENT_VALUE, "Passed Velocity meter Per Second value is: " + DESKTOP_VELOCITY_M_S + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_VELOCITY_M_S + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert Velocity meter Per Second to Velocity kilometers Per Hour", function(assert) {
+                var convertResult = ballistic.velocityLogic.convert(DESKTOP_VELOCITY_M_S, ballistic.velocityUnits.MeterPerSecond, ballistic.velocityUnits.KilometersPerHour);
+                var result = convertResult - DESKTOP_VELOCITY_KM_H;
+                assert.ok( result < REFERENT_VALUE, "Passed Velocity meter Per Second value is: " + DESKTOP_VELOCITY_M_S + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_VELOCITY_KM_H + " ) value is: " + result);
+            });
+
+
+            //Velocity meter Per Second to
+            QUnit.test( "Check convert Velocity kilometers Per Hour to Velocity feet Per Second", function(assert) {
+                var convertResult = ballistic.velocityLogic.convert(DESKTOP_VELOCITY_KM_H, ballistic.velocityUnits.KilometersPerHour, ballistic.velocityUnits.FeetPerSecond);
+                var result = convertResult - DESKTOP_VELOCITY_FT_S;
+                assert.ok( result < REFERENT_VALUE, "Passed Velocity kilometers Per Hour value is: " + DESKTOP_VELOCITY_KM_H + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_VELOCITY_FT_S + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert Velocity kilometers Per Hour to Velocity miles Per Hour", function(assert) {
+                var convertResult = ballistic.velocityLogic.convert(DESKTOP_VELOCITY_KM_H, ballistic.velocityUnits.KilometersPerHour, ballistic.velocityUnits.MilesPerHour);
+                var result = convertResult - DESKTOP_VELOCITY_MI_H;
+                assert.ok( result < REFERENT_VALUE, "Passed Velocity kilometers Per Hour value is: " + DESKTOP_VELOCITY_KM_H + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_VELOCITY_MI_H + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert Velocity kilometers Per Hour to Velocity meter Per Second", function(assert) {
+                var convertResult = ballistic.velocityLogic.convert(DESKTOP_VELOCITY_KM_H, ballistic.velocityUnits.KilometersPerHour, ballistic.velocityUnits.MeterPerSecond);
+                var result = convertResult - DESKTOP_VELOCITY_M_S;
+                assert.ok( result < REFERENT_VALUE, "Passed Velocity kilometers Per Hour value is: " + DESKTOP_VELOCITY_KM_H + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_VELOCITY_M_S + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert Velocity kilometers Per Hour to Velocity kilometers Per Hour", function(assert) {
+                var convertResult = ballistic.velocityLogic.convert(DESKTOP_VELOCITY_KM_H, ballistic.velocityUnits.KilometersPerHour, ballistic.velocityUnits.KilometersPerHour);
+                var result = convertResult - DESKTOP_VELOCITY_KM_H;
+                assert.ok( result < REFERENT_VALUE, "Passed Velocity kilometers Per Hour value is: " + DESKTOP_VELOCITY_KM_H + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_VELOCITY_KM_H + " ) value is: " + result);
+            });
+
+        </script>
+    </body>
+</html>

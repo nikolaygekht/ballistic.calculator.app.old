@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <Button
+            style="@style/MainMenuButton"
+            android:text="@string/btn_lbl_SelectTrace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonSelectTrace" />
+        <Button
+            style="@style/MainMenuButton"
+            android:text="@string/btn_lbl_SetAtmosphere"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonEditAtmosphere" />
+        <Button
+            style="@style/MainMenuButton"
+            android:text="@string/btn_lbl_SetWind"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonEditWind" />
+        <Button
+            style="@style/MainMenuButton"
+            android:text="@string/btn_lbl_BallisticTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonBallisticTable" />
+        <Button
+            style="@style/MainMenuButton"
+            android:text="@string/btn_lbl_SingleShot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonSingleShot" />
+        <Button
+            style="@style/MainMenuButton"
+            android:text="@string/btn_lbl_CommunicateDesktop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonCommunicateDesktop" />
+        <Button
+            style="@style/MainMenuButton"
+            android:text="@string/btn_lbl_Settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonSettings" />
+    </LinearLayout>
+</ScrollView>

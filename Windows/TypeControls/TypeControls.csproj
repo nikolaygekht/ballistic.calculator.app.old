@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{38B71900-8988-4FF0-BAE2-AE20B0DF35B9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gehtsoft.BallisticCalculator.UI</RootNamespace>
+    <AssemblyName>Gehtsoft.BallisticCalculator.UI.TypeControls</AssemblyName>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\CustomAngleControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\CustomAngleControl.designer.cs">
+      <DependentUpon>CustomAngleControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\CustomControlValue.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\CustomControlValue.designer.cs">
+      <DependentUpon>CustomControlValue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\CustomDistanceControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\CustomDistanceControl.designer.cs">
+      <DependentUpon>CustomDistanceControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\CustomPressureControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\CustomPressureControl.designer.cs">
+      <DependentUpon>CustomPressureControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\CustomTemperatureControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\CustomTemperatureControl.designer.cs">
+      <DependentUpon>CustomTemperatureControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\CustomVelocityControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\CustomVelocityControl.designer.cs">
+      <DependentUpon>CustomVelocityControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\CustomWeightControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\CustomWeightControl.designer.cs">
+      <DependentUpon>CustomWeightControl.cs</DependentUpon>
+    </Compile>
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="src\CustomControlValue.resx">
+      <DependentUpon>CustomControlValue.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="key.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Math\Math.csproj">
+      <Project>{93C5B26F-DFA3-4CAA-84B1-F53F61D33E4E}</Project>
+      <Name>Math</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

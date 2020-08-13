@@ -1,0 +1,7 @@
+0.3
+- Ammo info now contains bullet diameter and bullet length
+- Load/Save logic improved
+0.4
+- add bullet diameter/bullet length to ammo data
+- split drift presents to bullet preset and gun preset
+- add "clicks" parameter to zero

@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{ED53C64B-68F3-4D8F-829C-FB2CE82495CA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Gehtsoft.BallisticCalculator</RootNamespace>
+    <AndroidApplication>True</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <AssemblyName>BallisticCalculator</AssemblyName>
+    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidLinkMode>None</AndroidLinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AndroidSupportedAbis>armeabi-v7a;x86</AndroidSupportedAbis>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Connectivity">
+      <HintPath>Projects\bin\Connectivity.dll</HintPath>
+    </Reference>
+    <Reference Include="Math">
+      <HintPath>Projects\bin\Math.dll</HintPath>
+    </Reference>
+    <Reference Include="Serialization">
+      <HintPath>Projects\bin\Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Android" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Activities\BallisticTableActivity.cs" />
+    <Compile Include="src\Activities\CommunicateDesktopActivity.cs" />
+    <Compile Include="src\Activities\EditActivityBase.cs" />
+    <Compile Include="src\Activities\EditAtmosphereActivity.cs" />
+    <Compile Include="src\Activities\EditTraceActivity.cs" />
+    <Compile Include="src\Activities\EditWindActivity.cs" />
+    <Compile Include="src\Activities\MainActivity.cs" />
+    <Compile Include="src\Activities\SettingsActivity.cs" />
+    <Compile Include="src\Activities\SingleShotActivity.cs" />
+    <Compile Include="src\Activities\TracesActivity.cs" />
+    <Compile Include="src\Activities\WindSpeedListActivity.cs" />
+    <Compile Include="src\Model\DataAccessors\ITraceDataAccessor.cs" />
+    <Compile Include="src\Model\DataProviders\AtmosphereDataProvider.cs" />
+    <Compile Include="src\Model\DataProviders\BulletDataProvider.cs" />
+    <Compile Include="src\Model\DataAccessors\TraceDataAccessor.cs" />
+    <Compile Include="src\Model\DataProviders\BallisticDataProvider.cs" />
+    <Compile Include="src\Model\IBallisticCalculatorDelegate.cs" />
+    <Compile Include="src\Model\DataProviders\ShotDataProvider.cs" />
+    <Compile Include="src\Model\DataProviders\TraceDataProvider.cs" />
+    <Compile Include="src\Model\DataProviders\ZeroDataProvider.cs" />
+    <Compile Include="src\Model\BalliscticCalculator.cs" />
+    <Compile Include="src\Model\Bootstrap.cs" />
+    <Compile Include="src\Model\MathEx.Serialization\Container.cs" />
+    <Compile Include="src\Model\MathEx.Serialization\Object.cs" />
+    <Compile Include="src\Model\MathEx.Serialization\Serializer.cs" />
+    <Compile Include="src\Model\MathEx.Serialization\Value.cs" />
+    <Compile Include="src\Utilities\AnglePicker.cs" />
+    <Compile Include="src\Utilities\ApkUpdater.cs" />
+    <Compile Include="src\Utilities\DefaultUnits.cs" />
+    <Compile Include="src\Utilities\DefaultValues.cs" />
+    <Compile Include="src\Utilities\EditTextEx.cs" />
+    <Compile Include="src\Utilities\InetAddresEditText.cs" />
+    <Compile Include="src\Utilities\ServiceFinder.cs" />
+    <Compile Include="src\Utilities\ShotInfoBuilder.cs" />
+    <Compile Include="src\Model\DataProviders\TemperatureDataProvider.cs" />
+    <Compile Include="src\Utilities\TemperatureProvider.cs" />
+    <Compile Include="src\Utilities\UnitsAdapter.cs" />
+    <Compile Include="src\Utilities\Utilities.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Properties\AndroidManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Assets\AboutAssets.txt" />
+    <AndroidResource Include="Resources\layout\Settings.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SingleShot.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Traces.axml" />
+    <AndroidResource Include="Resources\layout\BallisticTable.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\CommunicateDesktop.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SetAtmo.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\EditTrace.axml" />
+    <AndroidResource Include="Resources\layout\SetWind.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\WindSpeedList.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Main.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\values\Strings.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-hdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\Icon.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Styles.xml" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+</Project>

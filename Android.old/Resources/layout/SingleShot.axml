@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <ScrollView
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tableLayoutBallisticTable"
+                android:stretchColumns="*">
+                <TableRow>
+                    <TextView
+                        android:id="@+id/textViewRange"
+                        android:gravity="center"
+                        android:text="@string/tv_lbl_Range" />
+                    <TextView
+                        android:id="@+id/textViewWind"
+                        android:gravity="center"
+                        android:text="@string/tv_lbl_Wind" />
+                    <TextView
+                        android:id="@+id/textViewWindDirection"
+                        android:gravity="center"
+                        android:text="@string/tv_lbl_WindDirectionClock" />
+                </TableRow>
+            </TableLayout>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:minWidth="25px"
+                android:minHeight="25px">
+                <NumberPicker
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants"
+                    android:id="@+id/numberPickerRange" />
+                <NumberPicker
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants"
+                    android:id="@+id/numberPickerWind" />
+                <NumberPicker
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:descendantFocusability="blocksDescendants"
+                    android:id="@+id/numberPickerWindDirection" />
+            </LinearLayout>
+            <Button
+                android:text="@string/btn_lbl_Calculate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonCalculateShot" />
+            <TableLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/tableLayoutBallisticTableHeader"
+                android:stretchColumns="*">
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+                    <TextView
+                        android:textSize="24dp"
+                        android:layout_weight="5"
+                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:id="@+id/textViewCorrectionAngleUnits"
+                        android:gravity="center"
+                        android:text="_Units_" />
+                    <TextView
+                        android:textSize="24dp"
+                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="5"
+                        android:gravity="center"
+                        android:text="@string/tv_lbl_Clicks" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp">
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:text="@string/tv_lbl_ElevationV"
+                        android:layout_weight="1"
+                        android:lines="5"
+                        android:paddingLeft="10dp" />
+                    <TextView
+                        android:textSize="32dp"
+                        android:layout_weight="5"
+                        android:layout_height="match_parent"
+                        android:layout_width="0dp"
+                        android:id="@+id/textViewElevationCorrectionAngle"
+                        android:gravity="center" />
+                    <TextView
+                        android:textSize="32dp"
+                        android:layout_weight="5"
+                        android:layout_height="match_parent"
+                        android:layout_width="0dp"
+                        android:gravity="center"
+                        android:id="@+id/textViewElevationCorrectionClicks" />
+                </TableRow>
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp">
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:text="@string/tv_lbl_WindV"
+                        android:layout_weight="1"
+                        android:lines="5"
+                        android:paddingLeft="10dp" />
+                    <TextView
+                        android:textSize="32dp"
+                        android:layout_weight="5"
+                        android:layout_height="match_parent"
+                        android:layout_width="0dp"
+                        android:id="@+id/textViewWindCorrectionAngle"
+                        android:gravity="center" />
+                    <TextView
+                        android:textSize="32dp"
+                        android:layout_weight="5"
+                        android:layout_height="match_parent"
+                        android:layout_width="0dp"
+                        android:id="@+id/textViewWindCorrectionClicks"
+                        android:gravity="center" />
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

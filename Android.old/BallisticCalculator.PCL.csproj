@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{3B868A1E-F1F0-4346-AB42-0CD0FA832009}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>BallisticCalculator</RootNamespace>
+    <AndroidApplication>True</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <AssemblyName>BallisticCalculator</AssemblyName>
+    <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidLinkMode>None</AndroidLinkMode>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AndroidSupportedAbis>armeabi-v7a;x86</AndroidSupportedAbis>
+    <DebugType>full</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Mono.Android" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Activities\BeaufortChartActivity.cs" />
+    <Compile Include="src\Activities\CommunicateDesktopActivity.cs" />
+    <Compile Include="src\Activities\EditActivityBase.cs" />
+    <Compile Include="src\Activities\EditAtmosphereActivity.cs" />
+    <Compile Include="src\Activities\EditTraceActivity.cs" />
+    <Compile Include="src\Activities\BallisticTableActivity.cs" />
+    <Compile Include="src\Activities\EditWindActivity.cs" />
+    <Compile Include="src\Activities\SettingsActivity.cs" />
+    <Compile Include="src\Activities\SingleShotActivity.cs" />
+    <Compile Include="src\Utils\UnitsAdapter.cs" />
+    <Compile Include="src\Utils\TemperatureProvider.cs" />
+    <Compile Include="src\Views\AnglePicker.cs" />
+    <Compile Include="src\MathEx.Serialization\Serializer.cs" />
+    <Compile Include="src\MathEx.Serialization\Container.cs" />
+    <Compile Include="src\MathEx.Serialization\Object.cs" />
+    <Compile Include="src\MathEx.Serialization\Value.cs" />
+    <Compile Include="src\Activities\MainActivity.cs" />
+    <Compile Include="src\Activities\TracesActivity.cs" />
+    <Compile Include="src\Utils\ApplicationData.cs" />
+    <Compile Include="src\Utils\BeaufortWindScale.cs" />
+    <Compile Include="src\Utils\DefaultUnits.cs" />
+    <Compile Include="src\Utils\ShotInfoDataProvider.cs" />
+    <Compile Include="src\Utils\StoppableTimer.cs" />
+    <Compile Include="src\Utils\Utilities.cs" />
+    <Compile Include="src\Views\EditTextEx.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Properties\AndroidManifest.xml" />
+    <None Include="Assets\AboutAssets.txt" />
+    <AndroidResource Include="Resources\layout\BallisticTable.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\EditTrace.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Settings.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\CommunicateDesktop.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SingleShot.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\EditWind.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\EditAtmosphere.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\BeaufortChart.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\Main.axml" />
+    <AndroidResource Include="Resources\values\Strings.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\drawable-hdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\Icon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\Icon.png" />
+    <AndroidResource Include="Resources\layout\Traces.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Projects\Serialization.PCL.csproj">
+      <Project>{36F3DAD6-7708-444F-B3FB-63C0F51FF07A}</Project>
+      <Name>Serialization.PCL</Name>
+    </ProjectReference>
+    <ProjectReference Include="Projects\Math.PCL.csproj">
+      <Project>{B0911DE6-9606-4FB4-9264-D54EF5378D7A}</Project>
+      <Name>Math.PCL</Name>
+    </ProjectReference>
+    <ProjectReference Include="Projects\Connectivity.PCL.csproj">
+      <Project>{DC663AB6-E243-4730-A917-F72C4A17ACA6}</Project>
+      <Name>Connectivity.PCL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Styles.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+</Project>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+  
+  <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent">
+    <Button
+        style="@style/MainMenuButton"
+        android:text="@string/btn_lbl_SelectTrace"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSelectTrace" />
+    <Button
+        style="@style/MainMenuButton"
+        android:text="@string/btn_lbl_SetAtmosphere"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSetAtmo" />
+    <Button
+        style="@style/MainMenuButton"
+        android:text="@string/btn_lbl_SetWind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSetWind" />
+    <Button
+        style="@style/MainMenuButton"
+        android:text="@string/btn_lbl_BallisticTable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnBallisticTable" />
+    <Button
+        style="@style/MainMenuButton"
+        android:text="@string/btn_lbl_SingleShot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSingleShot" />
+    <Button
+        style="@style/MainMenuButton"
+        android:text="@string/btn_lbl_CommunicateDesktop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnCommunicateDesktop" />
+    <Button
+        style="@style/MainMenuButton"
+        android:text="@string/btn_lbl_Settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSettings" />
+  </LinearLayout>
+  
+</ScrollView>

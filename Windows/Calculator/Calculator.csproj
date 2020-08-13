@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C66CE7DD-B998-4A5E-92BF-9AB473E051AA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gehtsoft.BallisticCalculator</RootNamespace>
+    <AssemblyName>BallisticCalculator</AssemblyName>
+    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Sportsbettingspot-Summer-Olympics-Shooting.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ZedGraph">
+      <HintPath>..\3rdparty\ZedGraph.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\ComparisonForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\ComparisonForm.Designer.cs">
+      <DependentUpon>ComparisonForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\AppForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\AppForm.Designer.cs">
+      <DependentUpon>AppForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\TraceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\TraceForm.Designer.cs">
+      <DependentUpon>TraceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\WebServerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\WebServerForm.Designer.cs">
+      <DependentUpon>WebServerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\WebServerState.cs" />
+    <EmbeddedResource Include="src\ComparisonForm.resx">
+      <DependentUpon>ComparisonForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="src\AppForm.resx">
+      <DependentUpon>AppForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\TraceForm.resx">
+      <DependentUpon>TraceForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\WebServerForm.resx">
+      <DependentUpon>WebServerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\ConnectivityData\Connectivity.csproj">
+      <Project>{2D3810DA-62DC-4C9C-B295-C9986CEC916B}</Project>
+      <Name>Connectivity %28Common\Connectivity%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Math\Math.csproj">
+      <Project>{93C5B26F-DFA3-4CAA-84B1-F53F61D33E4E}</Project>
+      <Name>Math</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Serialization\Serialization.csproj">
+      <Project>{632F2F5E-7FBF-47D3-8572-59B5F9DBEB7D}</Project>
+      <Name>Serialization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Connectivity\Connectivity.csproj">
+      <Project>{9381E364-18B1-425D-9864-3CB6C241AFD0}</Project>
+      <Name>Connectivity %28Libraries\Connectivity%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Reticle\Reticle.csproj">
+      <Project>{183DC2F3-010B-43AB-93A0-B1E40721031B}</Project>
+      <Name>Reticle</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Serialization.Windows\Serialization.Windows.csproj">
+      <Project>{7565FF50-EA43-4655-AA37-FAA224776483}</Project>
+      <Name>Serialization.Windows</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TypeControls\TypeControls.csproj">
+      <Project>{38B71900-8988-4FF0-BAE2-AE20B0DF35B9}</Project>
+      <Name>TypeControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UI\UI.csproj">
+      <Project>{0CFFCA00-B702-40EB-9C18-1322863558AB}</Project>
+      <Name>UI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Sportsbettingspot-Summer-Olympics-Shooting.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

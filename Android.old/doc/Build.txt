@@ -1,0 +1,15 @@
+Build guide.
+
+1. Prerequisites
+1.1 Latest Xamarin with activated trial period
+1.2.1 Visual Studio 2013 Express or higher or 1.2.2
+1.2.2 Visual Studio 2010 SP1
+1.2.2.1 Portable Library Tools ( https://visualstudiogallery.msdn.microsoft.com/b0e0b5e9-e138-410b-ad10-00cb3caf4981/ )
+1.2.2.2 Portable Library Reference Assemblies 4.6 ( http://www.microsoft.com/en-us/download/details.aspx?id=40727 )
+1.2.2.3 If Xamarin was installed before installation of 1.2.2.1 and 1.2.2.2 Xamarin 'repair' requred (Control Panel -> Programs and Features -> Xamarin -> RMB -> Repair)
+
+2. Building
+2.1 Open Android/BallisticCalculator.sln solution in Xamarin Studio or Visual Studio
+2.2 Press 'Build Solution' button
+2.3 Connect device or select simulator from the list
+2.4 Press 'Run' button

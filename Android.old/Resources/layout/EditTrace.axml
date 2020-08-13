@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <ScrollView
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <TextView
+                android:id="@+id/textViewTraceName"
+                android:text="@string/edit_hint_TraceName"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:inputType="text"
+                android:hint="@string/edit_hint_TraceName"
+                android:id="@+id/editTextTraceName" />
+            <TextView
+                android:id="@+id/textViewBulletWeight"
+                android:text="@string/edit_hint_BulletWeight"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:inputType="numberDecimal"
+                    android:hint="@string/edit_hint_BulletWeight"
+                    android:id="@+id/editTextBulletWeight" />
+                <Button
+                    android:text=""
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="false"
+                    android:id="@+id/buttonBulletWeightUnits" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/textViewMuzzleVelocity"
+                android:text="@string/edit_hint_MuzzleVelocity"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:inputType="numberDecimal"
+                    android:hint="@string/edit_hint_MuzzleVelocity"
+                    android:id="@+id/editTextMuzzleVelocity" />
+                <Button
+                    android:text=""
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="false"
+                    android:id="@+id/buttonMuzzleVelocityUnits" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/textViewBallisticCoefficient"
+                android:text="@string/edit_hint_BallisticCoefficient"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:inputType="numberDecimal"
+                    android:hint="@string/edit_hint_BallisticCoefficient"
+                    android:id="@+id/editTextBallisticCoefficient" />
+                <Button
+                    android:text=""
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="false"
+                    android:id="@+id/buttonDragTable" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/textViewZeroDistance"
+                android:text="@string/edit_hint_ZeroDistance"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:inputType="numberDecimal"
+                    android:hint="@string/edit_hint_ZeroDistance"
+                    android:id="@+id/editTextZeroDistance" />
+                <Button
+                    android:text=""
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="false"
+                    android:id="@+id/buttonZeroDistanceUnits" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/textViewZeroHeight"
+                android:text="@string/edit_hint_ZeroHeight"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:inputType="numberDecimal"
+                    android:hint="@string/edit_hint_ZeroHeight"
+                    android:id="@+id/editTextZeroHeight" />
+                <Button
+                    android:text=""
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="false"
+                    android:id="@+id/buttonZeroHeightUnits" />
+            </LinearLayout>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/cb_lbl_CalculateSpinDrift"
+                android:id="@+id/checkBoxCalculateSpinDrift" />
+            <TextView
+                android:id="@+id/textViewBulletDiameter"
+                android:text="@string/edit_hint_BulletDiameter"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:inputType="numberDecimal"
+                    android:hint="@string/edit_hint_BulletDiameter"
+                    android:id="@+id/editTextBulletDiameter" />
+                <Button
+                    android:text=""
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="false"
+                    android:id="@+id/buttonBulletDiameterUnits" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/textViewBulletLength"
+                android:text="@string/edit_hint_BulletLength"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:inputType="numberDecimal"
+                    android:hint="@string/edit_hint_BulletLength"
+                    android:id="@+id/editTextBulletLength" />
+                <Button
+                    android:text=""
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="false"
+                    android:id="@+id/buttonBulletLengthUnits" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/textViewRifling"
+                android:text="@string/edit_hint_Rifling"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:inputType="numberDecimal"
+                    android:hint="@string/edit_hint_Rifling"
+                    android:id="@+id/editTextRifling" />
+                <Button
+                    android:text=""
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="false"
+                    android:id="@+id/buttonRiflingUnits" />
+            </LinearLayout>
+            <RadioGroup
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/radioGroupRiflingHand">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/rb_lbl_RiflingLeftHand"
+                    android:id="@+id/radioButtonRiflingHandLeft" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rb_lbl_RiflingRightHand"
+                    android:id="@+id/radioButtonRiflingHandRight" />
+            </RadioGroup>
+            <TextView
+                android:id="@+id/textViewVerticalClick"
+                android:text="@string/edit_hint_VerticalClick"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:inputType="numberDecimal"
+                    android:hint="@string/edit_hint_VerticalClick"
+                    android:id="@+id/editTextVerticalClick" />
+                <Button
+                    android:text=""
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="false"
+                    android:id="@+id/buttonVerticalClickUnits" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/textViewHorizontalClick"
+                android:text="@string/edit_hint_HorizontalClick"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:inputType="numberDecimal"
+                    android:hint="@string/edit_hint_HorizontalClick"
+                    android:id="@+id/editTextHorizontalClick" />
+                <Button
+                    android:text=""
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textAllCaps="false"
+                    android:id="@+id/buttonHorizontalClickUnits" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:text="@string/btn_lbl_Save"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonSave" />
+        <Button
+            android:text="@string/btn_lbl_Cancel"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonCancel" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,10 @@
+.vs/
+.nuget/
+.svn/
+.git/
+bin/
+obj/
+packages/
+*.user
+*.~*
+

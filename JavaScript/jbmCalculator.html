@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body {
+            font-size: 18px;
+        }
+
+        input , select {
+            width: 150px;
+        }
+
+        input[type="checkbox"] {
+            width: 15px;
+        }
+
+
+        #selectBullet {
+            width: 250px;
+        }
+
+        label  {
+            display: block;
+            float: left;
+            /*margin-right: 25px;*/
+            width: 200px;
+        }
+
+        .window {
+            width: 95%;
+            margin: 0 auto;
+            min-height: 500px;
+            border: 1px solid #000000;
+            padding: 5px;
+            display: inline-block;
+        }
+
+        #calculate {
+            margin-top: 210px;
+            padding: 20px;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        .calcButtonWrapper {
+            margin: 0 auto;
+            width: 150px;
+        }
+
+        .bordered {
+            border: 1px solid #000000;
+            margin: 15px;
+            padding: 15px;
+            float: left;
+        }
+
+        td {
+            padding: 15px;
+        }
+
+        tr {
+            font-size: 18px;
+        }
+
+        tr.trh {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .row {
+            min-height: 345px;
+            margin: 10px;
+            padding: 15px;
+            border: 1px solid #848484;
+        }
+
+        .inner {
+            /*float: left;*/
+            overflow: hidden;
+            margin-right: 15px;
+            min-height: 25px;
+            /*border-bottom: 1px solid #c9c9c9;*/
+            padding-top: 5px;
+            width: 355px;
+        }
+
+        .group {
+            border: 1px solid #c9c9c9;
+            padding: 5px;
+            margin: 5px;
+        }
+
+        .block {
+            width: 430px;
+            min-height: 250px;
+            float: left;
+        }
+
+        .block.small {
+            min-height: 160px;
+        }
+
+        .small .row{
+            min-height: 160px;
+        }
+
+        a {
+            font-size: 25px;
+            text-decoration: none;
+            color: #0D3349;
+        }
+
+    </style>
+</head>
+<body>
+
+<script src="3rd_party/jquery-1.11.3.js"></script>
+<script src="Math/ballistic.js"></script>
+<script src="Math/json.js"></script>
+<a href="unit_tests/index.html">Unit Tests >></a>
+<div class="jbm-test">
+    <h1>JBM Calculator</h1>
+    <div class="window">
+        <div class="block">
+            <div class="row">
+                <h3>Atmosphere:</h3>
+                <div class="group">
+                    <div class="inner">
+                        <label for="atmoTemp">Temperature:</label>
+                        <input type="text" id="atmoTemp" placeholder="Type numeric" value="59.0"/>
+                    </div>
+                    <div class="inner">
+                        <label for="atmoTempUnit">Units:</label>
+                        <select id="atmoTempUnit">
+                            <option value="celsius">Celsius</option>
+                            <option value="fahrenheit" selected>Fahrenheit</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="inner">
+                        <label for="atmoPressure">Pressure:</label>
+                        <input type="text" id="atmoPressure" placeholder="Type numeric" value="29.53"/>
+                    </div>
+                    <div class="inner">
+                        <label for="atmoPressureUnit">Units:</label>
+                        <select id="atmoPressureUnit">
+                            <option value="inch_hg" selected>InchHg</option>
+                            <option value="mm_hg">MmHg</option>
+                            <option value="bar">Bar</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="inner">
+                        <label for="atmoHumidity">Humidity:</label>
+                        <input type="text" id="atmoHumidity" placeholder="Type numeric" value="0.78"/>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="inner">
+                        <label for="atmoAltitude">Altitude:</label>
+                        <input type="text" id="atmoAltitude" placeholder="Type numeric" value="0"/>
+                    </div>
+                    <div class="inner">
+                        <label for="atmoAltitudeUnit">Units:</label>
+                        <select id="atmoAltitudeUnit">
+                            <option value="inch">Inch</option>
+                            <option value="foot" selected>Foot</option>
+                            <option value="yard">Yard</option>
+                            <option value="mile">Mile</option>
+                            <option value="millimeter">Millimeter</option>
+                            <option value="centimeter">Centimeter</option>
+                            <option value="meter">Meter</option>
+                            <option value="kilometer">Kilometer</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="block">
+            <div class="row">
+                <h3>Shot:</h3>
+                <div class="group">
+                    <div class="inner">
+                        <label for="shotLineOfSightAngle">Line Of Sight Angle:</label>
+                        <input type="text" id="shotLineOfSightAngle" placeholder="Type numeric" value="0"/>
+                    </div>
+                    <div class="inner">
+                        <label for="shotLineOfSightAngleUnit">Units:</label>
+                        <select id="shotLineOfSightAngleUnit">
+                            <option value="radian" selected>Radian</option>
+                            <option value="degree">Degree</option>
+                            <option value="moa">Moa</option>
+                            <option value="mil">Mil</option>
+                            <option value="mil_dot">MilDot</option>
+                            <option value="amil">AMil</option>
+                            <option value="in_per_100_yards">In Per 100 Yards</option>
+                            <option value="cm_per_100_meters">Cm Per 100 Meters</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="inner">
+                        <label for="shotCantAngle">Cant Angle:</label>
+                        <input type="text" id="shotCantAngle" placeholder="Type numeric" value="0"/>
+                    </div>
+                    <div class="inner">
+                        <label for="shotCantAngleUnit">Units:</label>
+                        <select id="shotCantAngleUnit">
+                            <option value="radian" selected>Radian</option>
+                            <option value="degree">Degree</option>
+                            <option value="moa">Moa</option>
+                            <option value="mil">Mil</option>
+                            <option value="mil_dot">MilDot</option>
+                            <option value="amil">AMil</option>
+                            <option value="in_per_100_yards">In Per 100 Yards</option>
+                            <option value="cm_per_100_meters">Cm Per 100 Meters</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <div class="inner">
+                        <label for="shotElevation">Elevation:</label>
+                        <input type="text" id="shotElevation" placeholder="Type numeric" value="0.001078198160695309"/>
+                    </div>
+                    <div class="inner">
+                        <label for="shotElevationUnit">Units:</label>
+                        <select id="shotElevationUnit">
+                            <option value="radian" selected>Radian</option>
+                            <option value="degree">Degree</option>
+                            <option value="moa">Moa</option>
+                            <option value="mil">Mil</option>
+                            <option value="mil_dot">MilDot</option>
+                            <option value="amil">AMil</option>
+                            <option value="in_per_100_yards">In Per 100 Yards</option>
+                            <option value="cm_per_100_meters">Cm Per 100 Meters</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="block">
+
+            <div class="row">
+                <h3>Rifle:</h3>
+                <div class="group">
+                    <div class="inner">
+                        <label for="velocityRifle">Velocity:</label>
+                        <input type="text" id="velocityRifle" placeholder="Type numeric" value="2780.0"/>
+                    </div>
+
+                    <div class="inner">
+                        <label for="velocityRifleUnit">Units:</label>
+                        <select id="velocityRifleUnit">
+                            <option value="feet_per_second" selected>Feet Per Second</option>
+                            <option value="miles_per_hour">Miles Per Hour</option>
+                            <option value="meter_per_second">Meter Per Second</option>
+                            <option value="kilometers_per_hour">Kilometers Per Hour</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="inner">
+                        <label for="sightHeight">Sight height:</label>
+                        <input type="text" id="sightHeight" placeholder="Type numeric" value="0.125"/>
+                    </div>
+
+                    <div class="inner">
+                        <label for="sightHeightUnit">Units:</label>
+                        <select id="sightHeightUnit">
+                            <option value="inch">Inch</option>
+                            <option value="foot" selected>Foot</option>
+                            <option value="yard">Yard</option>
+                            <option value="mile">Mile</option>
+                            <option value="millimeter">Millimeter</option>
+                            <option value="centimeter">Centimeter</option>
+                            <option value="meter">Meter</option>
+                            <option value="kilometer">Kilometer</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="block">
+            <div class="row">
+                <h3>Range:</h3>
+                <div class="group">
+                    <div class="inner">
+                        <label for="zeroRange">Zero Range:</label>
+                        <input type="text" id="zeroRange" placeholder="Type numeric" value="300"/>
+
+                    </div>
+                    <div class="inner">
+                        <label for="zeroRangeUnit">Units:</label>
+                        <select id="zeroRangeUnit">
+                            <option value="inch">Inch</option>
+                            <option value="foot" selected>Foot</option>
+                            <option value="yard">Yard</option>
+                            <option value="mile">Mile</option>
+                            <option value="millimeter">Millimeter</option>
+                            <option value="centimeter">Centimeter</option>
+                            <option value="meter">Meter</option>
+                            <option value="kilometer">Kilometer</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <div class="inner">
+                        <label for="nearZero">Near Zero:</label>
+                        <select id="nearZero">
+                            <option value="true">True</option>
+                            <option value="false" selected>False</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <div class="inner">
+                        <label for="rangeToOrSize">Range To Or Size:</label>
+                        <input type="text" id="rangeToOrSize" placeholder="Type numeric" value="3000"/>
+                    </div>
+
+                    <div class="inner">
+                        <label for="rangeToOrSizeUnit">Units:</label>
+                        <select id="rangeToOrSizeUnit">
+                            <option value="inch">Inch</option>
+                            <option value="foot" selected>Foot</option>
+                            <option value="yard">Yard</option>
+                            <option value="mile">Mile</option>
+                            <option value="millimeter">Millimeter</option>
+                            <option value="centimeter">Centimeter</option>
+                            <option value="meter">Meter</option>
+                            <option value="kilometer">Kilometer</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="block">
+            <div class="row">
+                <h3>Wind: </h3>
+                <div class="group">
+                    <div class="inner">
+                        <label for="velocityWind">Velocity:</label>
+                        <input type="text" id="velocityWind" placeholder="Type numeric" value="0"/>
+                    </div>
+                    <div class="inner">
+                        <label for="velocityWindUnit">Units:</label>
+                        <select id="velocityWindUnit">
+                            <option value="feet_per_second" selected>Feet Per Second</option>
+                            <option value="miles_per_hour">Miles Per Hour</option>
+                            <option value="meter_per_second">Meter Per Second</option>
+                            <option value="kilometers_per_hour">Kilometers Per Hour</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="group">
+                    <div class="inner">
+                        <label for="directionWind">Direction:</label>
+                        <input type="text" id="directionWind" placeholder="Type numeric" value="0"/>
+                    </div>
+                    <div class="inner">
+                        <label for="directionWindUnit">Units:</label>
+                        <select id="directionWindUnit">
+                            <option value="radian" selected>Radian</option>
+                            <option value="degree">Degree</option>
+                            <option value="moa">Moa</option>
+                            <option value="mil">Mil</option>
+                            <option value="mil_dot">MilDot</option>
+                            <option value="amil">AMil</option>
+                            <option value="in_per_100_yards">In Per 100 Yards</option>
+                            <option value="cm_per_100_meters">Cm Per 100 Meters</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="block small">
+
+            <div class="row">
+                <h3>Bullet:</h3>
+                <div class="group">
+                    <div class="inner">
+                        <label for="bulletBc">Ballistic Coefficient: </label>
+                        <input type="text" id="bulletBc" placeholder="Type numeric" value="0.398"/>
+                    </div>
+
+                    <div class="inner">
+                        <label for="bulletDragTable">Drag table:</label>
+                        <select id="bulletDragTable">
+                            <option value="g1" selected>G1</option>
+                            <option value="g2">G2</option>
+                            <option value="g5">G5</option>
+                            <option value="g6">G6</option>
+                            <option value="g7">G7</option>
+                            <option value="g8">G8</option>
+                            <option value="gl">Gl</option>
+                            <option value="gi">Gi</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="group">
+
+                    <div class="inner">
+                        <label for="selectBullet">Choose bullet: </label>
+                        <select id="selectBullet"></select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="block small">
+            <div class="row">
+                <h3>Step: </h3>
+                <div class="group">
+                    <div class="inner">
+                        <label>Step:</label>
+                        <input type="text" id="step" placeholder="Type numeric" value="75"/>
+                    </div>
+                    <div class="inner">
+                        <label for="stepUnit">Units:</label>
+                        <select id="stepUnit">
+                            <option value="inch">Inch</option>
+                            <option value="foot" selected>Foot</option>
+                            <option value="yard">Yard</option>
+                            <option value="mile">Mile</option>
+                            <option value="millimeter">Millimeter</option>
+                            <option value="centimeter">Centimeter</option>
+                            <option value="meter">Meter</option>
+                            <option value="kilometer">Kilometer</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="block small">
+            <div class="row">
+                <h3>Trajectory target:</h3>
+                <label>
+                    <span>Target:</span>
+                    <select id="trajectoryTarget">
+                        <option value="elevationAngle">Elevation Angle</option>
+                        <option value="elevationAngleAndRange">Elevation Angle And Range</option>
+                        <option value="range" selected>Range</option>
+                        <option value="dangerZone">DangerZone</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+
+        <div class="calcButtonWrapper">
+            <button id="calculate">Calculate</button>
+        </div>
+    </div>
+</div>
+<div>
+    <h2>Calculation Result</h2>
+    <div id="resultTarget"></div>
+</div>
+<script type="text/javascript">
+
+    function check(data) {
+        return ((typeof (data) !== 'undefined') && (data !== null));
+    }
+
+    function drawElevationAngle(result) {
+        if (check(result) && check(result.elevationAngle)) {
+            var table = $("<table/>", {
+                border : "1|0",
+                style : "width:95%; margin: 0 auto; margin-bottom:15px;"
+            });
+            var tr = $("<tr/>" , {
+                class : "trh"
+            });
+            tr.append("<td>Elevation angle</td>");
+            table.append(tr);
+            var tr2 = $("<tr/>");
+            tr2.append("<td>" + result.elevationAngle + " (rad) </td>");
+            table.append(tr2);
+            var resultTarget = $('#resultTarget');
+            resultTarget.append(table);
+        }
+//            $('body').scrollTop("100");
+    }
+
+    function drawRangeTable(result) {
+
+        if (check(result) && check(result.ranges) && result.ranges.length > 0) {
+            var table = $("<table/>", {
+                border: "1|0",
+                style: "width:95%; margin: 0 auto;"
+            });
+            var tr = $("<tr/>", {
+                class: "trh"
+            });
+            tr.append("<td>#</td>");
+            tr.append("<td>Drop</td>");
+            tr.append("<td>Mach</td>");
+            tr.append("<td>Range</td>");
+            tr.append("<td>Time</td>");
+            tr.append("<td>Velocity</td>");
+            tr.append("<td>Windage</td>");
+            table.append(tr);
+            var noResult = true;
+            var i = 0;
+            $.each(result.ranges, function (index, elem) {
+                if (check(elem)) {
+                    noResult = false;
+                    var tr2 = $("<tr/>");
+                    tr2.append("<td>" + i + " </td>");
+                    tr2.append("<td>" + elem.getDrop() + " (ft) </td>");
+                    tr2.append("<td>" + elem.getMach() + " (ft/s) </td>");
+                    tr2.append("<td>" + elem.getRange() + " (ft) </td>");
+                    tr2.append("<td>" + elem.getTime() + " (s) </td>");
+                    tr2.append("<td>" + elem.getVelocity() + " (ft/s) </td>");
+                    tr2.append("<td>" + elem.getWindage() + " (ft) </td>");
+                    table.append(tr2);
+                    i++;
+                }
+            });
+            var resultTarget = $('#resultTarget');
+            if (noResult) {
+                resultTarget.append("<div>With entered data calculation was not performed. Please open the browser console and see log message.</div>");
+            } else {
+                resultTarget.append(table);
+            }
+            //$('body').scrollTop("100");
+
+        }
+    }
+    $(document).ready(function() {
+        var select = $("#selectBullet");
+
+        if (check(BULLETS) && BULLETS.length > 0) {
+            $.each(BULLETS, function(index, bullet) {
+                if (check(bullet)) {
+                    if (!check(bullet.ammo_info_ex)) throw "Bullet Ammo info is undefined";
+                    var option = $('<option/>', bullet.ammo_info_ex);
+                    if (bullet.filename === '.308 Win PMC 147gr FMJ.ammo') {
+                        option.get(0).selected = true;
+                    }
+                    option.append(bullet.filename);
+                    select.append(option);
+                }
+            });
+        }
+
+        var ballistic = new BallisticCalculator();
+
+        /*********************DOM***************/
+        var bulletDragTable =  $('#bulletDragTable');
+        var bulletBalCoef = $('#bulletBc');
+        var velocityRifleUnit = $('#velocityRifleUnit');
+        var sightHeightUnit = $('#sightHeightUnit');
+        var atmoTempUnit = $('#atmoTempUnit');
+        var atmoPressureUnit = $('#atmoPressureUnit');
+        var atmoAltitudeUnit = $('#atmoAltitudeUnit');
+        var shotLineOfSightAngleUnit = $('#shotLineOfSightAngleUnit');
+        var shotCantAngleUnit = $('#shotCantAngleUnit');
+        var shotElevationUnit = $('#shotElevationUnit');
+        var velocityWindUnit = $('#velocityWindUnit');
+        var directionWindUnit = $('#directionWindUnit');
+        var zeroRangeUnit = $('#zeroRangeUnit');
+        var stepUnit = $('#stepUnit');
+        var rangeToOrSizeUnit = $('#rangeToOrSizeUnit');
+
+
+        var initialVelocityRifleUnitValue = velocityRifleUnit.val();
+        var initialSightHeightUnit = sightHeightUnit.val();
+        var initialAtmoTempUnit = atmoTempUnit.val();
+        var initialAtmoPressureUnit = atmoPressureUnit.val();
+        var initialAtmoAltitudeUnit = atmoAltitudeUnit.val();
+        var initialShotCantAngleUnit = shotCantAngleUnit.val();
+        var initialShotElevationUnit = shotElevationUnit.val();
+        var initialShotLineOfSightAngleUnit = shotLineOfSightAngleUnit.val();
+        var initialVelocityWindUnit = velocityWindUnit.val();
+        var initialDirectionWindUnit = directionWindUnit.val();
+        var initialZeroRangeUnit = zeroRangeUnit.val();
+        var initialRangeToOrSizeUnit = rangeToOrSizeUnit.val();
+        var initialStepUnit = stepUnit.val();
+
+        select.bind('change', function() {
+            if (check(this)) {
+                var options = this.options;
+                $.each(options, function() {
+                    if (this.selected) {
+                        var bc = parseFloat(this.getAttribute('bc'));
+                        bulletBalCoef.val(bc);
+
+                        var dragTable = this.getAttribute('table').toLowerCase();
+                        bulletDragTable.find('option').each(function() {
+                            if ($(this).val() ===  dragTable) {
+                                this.selected = true;
+                            }
+                        });
+                        var velocityRifle = $('#velocityRifle');
+                        var muzzleVelocity = parseFloat(this.getAttribute('muzzle-velocity'));
+                        velocityRifle.val(muzzleVelocity);
+                        velocityRifleUnit.find('option').eq(0).get(0).selected = true;
+                        return false;
+                    }
+                });
+            }
+        });
+
+        rangeToOrSizeUnit.bind('change', function() {
+            var unitTo = $(this).val();
+            var rangeToOrSize = $('#rangeToOrSize');
+            if (check(rangeToOrSize)) {
+                var value = rangeToOrSize.val();
+                rangeToOrSize.val(ballistic.distanceLogic.convert(value, initialRangeToOrSizeUnit, unitTo));
+                initialRangeToOrSizeUnit = unitTo;
+            }
+        });
+
+        zeroRangeUnit.bind('change', function() {
+            var unitTo = $(this).val();
+            var zeroRange = $('#zeroRange');
+            if (check(zeroRange)) {
+                var value = zeroRange.val();
+                zeroRange.val(ballistic.distanceLogic.convert(value, initialZeroRangeUnit, unitTo));
+                initialZeroRangeUnit = unitTo;
+            }
+        });
+
+        stepUnit.bind('change', function() {
+            var unitTo = $(this).val();
+            var step = $('#step');
+            if (check(step)) {
+                var value = step.val();
+                step.val(ballistic.distanceLogic.convert(value, initialStepUnit, unitTo));
+                initialStepUnit = unitTo;
+            }
+        });
+
+        directionWindUnit.bind('change', function() {
+            var unitTo = $(this).val();
+            var directionWind = $('#directionWind');
+            if (check(directionWind)) {
+                var value = directionWind.val();
+                directionWind.val(ballistic.angleLogic.convert(value, initialDirectionWindUnit, unitTo));
+                initialDirectionWindUnit = unitTo;
+            }
+        });
+
+        velocityWindUnit.bind('change', function() {
+            var unitTo = $(this).val();
+            var velocityWind = $('#velocityWind');
+            if (check(velocityWind)) {
+                var value = velocityWind.val();
+                velocityWind.val(ballistic.velocityLogic.convert(value, initialVelocityWindUnit, unitTo));
+                initialVelocityWindUnit = unitTo;
+            }
+        });
+
+        shotElevationUnit.bind('change', function() {
+            var unitTo = $(this).val();
+            var shotElevation = $('#shotElevation');
+            if (check(shotElevation)) {
+                var value = shotElevation.val();
+                shotElevation.val(ballistic.angleLogic.convert(value, initialShotElevationUnit, unitTo));
+                initialShotElevationUnit = unitTo;
+            }
+        });
+
+        shotCantAngleUnit.bind('change', function() {
+            var unitTo = $(this).val();
+            var shotCantAngle = $('#shotCantAngle');
+            if (check(shotCantAngle)) {
+                var value = shotCantAngle.val();
+                shotCantAngle.val(ballistic.angleLogic.convert(value, initialShotCantAngleUnit, unitTo));
+                initialShotCantAngleUnit = unitTo;
+            }
+        });
+
+        shotLineOfSightAngleUnit.bind('change', function() {
+            var unitTo = $(this).val();
+            var shotLineOfSightAngle = $('#shotLineOfSightAngle');
+            if (check(shotLineOfSightAngle)) {
+                var value = shotLineOfSightAngle.val();
+                shotLineOfSightAngle.val(ballistic.angleLogic.convert(value, initialShotLineOfSightAngleUnit, unitTo));
+                initialShotLineOfSightAngleUnit = unitTo;
+            }
+        });
+
+        atmoAltitudeUnit.bind('change', function() {
+            var unitTo = $(this).val();
+            var atmoAltitude = $('#atmoAltitude');
+            if (check(atmoAltitude)) {
+                var value = atmoAltitude.val();
+                atmoAltitude.val(ballistic.distanceLogic.convert(value, initialAtmoAltitudeUnit, unitTo));
+                initialAtmoAltitudeUnit = unitTo;
+            }
+        });
+
+        atmoPressureUnit.bind('change', function() {
+            var unitTo = $(this).val();
+            var atmoPressure = $('#atmoPressure');
+            if (check(atmoPressure)) {
+                var value = atmoPressure.val();
+                atmoPressure.val(ballistic.pressureLogic.convert(value, initialAtmoPressureUnit, unitTo));
+                initialAtmoPressureUnit = unitTo;
+            }
+        });
+
+        atmoTempUnit.bind('change', function() {
+            var unitTo = $(this).val();
+            var atmoTemp = $('#atmoTemp');
+            if (check(atmoTemp)) {
+                var value = atmoTemp.val();
+                atmoTemp.val(ballistic.temperatureLogic.convert(value, initialAtmoTempUnit, unitTo));
+                initialAtmoTempUnit = unitTo;
+            }
+        });
+
+        sightHeightUnit.bind('change', function() {
+            var unitTo = $(this).val();
+            var sightHeight = $('#sightHeight');
+            if (check(sightHeight)) {
+                var value = sightHeight.val();
+                sightHeight.val(ballistic.distanceLogic.convert(value, initialSightHeightUnit, unitTo));
+                initialSightHeightUnit = unitTo;
+            }
+        });
+
+        velocityRifleUnit.bind('change', function() {
+            var unitTo = $(this).val();
+            var velocityRifle = $('#velocityRifle');
+            if (check(velocityRifle)) {
+                var value = velocityRifle.val();
+                velocityRifle.val(ballistic.velocityLogic.convert(value, initialVelocityRifleUnitValue, unitTo));
+                initialVelocityRifleUnitValue = unitTo;
+            }
+        });
+
+        $("#calculate").bind('click', function () {
+            var trajectoryTarget = $('#trajectoryTarget');
+            var calcTarget = trajectoryTarget.val();
+            //Selected Units
+            var bulletBc = bulletBalCoef.val();
+            if (!check(bulletBc)) {
+                bulletBc = 0;
+            }
+
+
+            var velocityRifle =  parseFloat($('#velocityRifle').val());
+            if (!check(velocityRifle)) {
+                velocityRifle = 0;
+            }
+
+            velocityRifle = ballistic.velocityLogic.convert(velocityRifle, velocityRifleUnit.val(), ballistic.velocityUnits.FeetPerSecond);
+
+            var sightHeight =  parseFloat($('#sightHeight').val());
+            if (!check(sightHeight)) {
+                sightHeight = 0;
+            }
+
+            sightHeight = ballistic.distanceLogic.convert(sightHeight, sightHeightUnit.val(), ballistic.distanceUnits.Foot);
+
+
+            var calcArgs = new ballistic.jbmCalculator.calculationArguments();
+            //Bullet creation
+            calcArgs.bullet = new ballistic.bullet(bulletBc, bulletDragTable.val());
+            //Rifle creation
+            calcArgs.rifle = new ballistic.rifle(velocityRifle, sightHeight);
+
+            //Atmosphere arguments creation
+            var atmoArguments = new ballistic.atmoArguments();
+            atmoArguments.temperature = ballistic.temperatureLogic.convert(parseFloat($('#atmoTemp').val()), atmoTempUnit.val(), ballistic.temperatureUnits.Fahrenheit);
+            atmoArguments.pressure = ballistic.pressureLogic.convert(parseFloat($('#atmoPressure').val()), atmoPressureUnit.val(), ballistic.pressureUnits.InchHg);
+            atmoArguments.humidity = parseFloat($('#atmoHumidity').val());
+            atmoArguments.altitude = ballistic.distanceLogic.convert(parseFloat($('#atmoAltitude').val()), atmoAltitudeUnit.val(), ballistic.distanceUnits.Foot);
+            //Atmosphere creation
+            calcArgs.atmo = new ballistic.atmo(atmoArguments);
+
+            //Shot creation
+            var shotLineOfSightAngle =  parseFloat($('#shotLineOfSightAngle').val());
+            if (!check(shotLineOfSightAngle)) {
+                shotLineOfSightAngle = 0;
+            }
+
+            shotLineOfSightAngle = ballistic.angleLogic.convert(shotLineOfSightAngle, shotLineOfSightAngleUnit.val(), ballistic.angleUnits.Radian);
+
+            var shotCantAngle =  parseFloat($('#shotCantAngle').val());
+            if (!check(shotCantAngle)) {
+                shotCantAngle =  0;
+            }
+
+            shotCantAngle = ballistic.angleLogic.convert(shotCantAngle, shotCantAngleUnit.val(), ballistic.angleUnits.Radian);
+
+            var shotElevation =  parseFloat($('#shotElevation').val());
+            if (!check(shotElevation)) {
+                shotElevation = 0;
+            }
+
+            shotElevation = ballistic.angleLogic.convert(shotElevation, shotElevationUnit.val(), ballistic.angleUnits.Radian);
+
+            calcArgs.shot = new ballistic.shot(shotLineOfSightAngle, shotCantAngle, shotElevation);
+
+            //Wind creation
+            var velocityWind =  parseFloat($('#velocityWind').val());
+            if (!check(velocityWind)) {
+                velocityWind = 0;
+            }
+
+            velocityWind = ballistic.velocityLogic.convert(velocityWind, velocityWindUnit.val(), ballistic.velocityUnits.FeetPerSecond);
+
+            var directionWind =  parseFloat($('#directionWind').val());
+            if (!check(directionWind)) {
+                directionWind = 0;
+            }
+
+            directionWind = ballistic.angleLogic.convert(directionWind, directionWindUnit.val(), ballistic.angleUnits.Radian);
+
+            calcArgs.wind = new ballistic.wind(velocityWind, directionWind);
+
+            //Zero Range creation
+            calcArgs.zeroRange =  ballistic.distanceLogic.convert(parseFloat($('#zeroRange').val()), zeroRangeUnit.val(), ballistic.distanceUnits.Foot);
+
+            //Near zero creation
+            calcArgs.nearZero =  $('#nearZero').val() === "true";
+
+
+            //Target creation
+            calcArgs.target =  $('#trajectoryTarget').val();
+
+            console.log(calcArgs);
+            console.log("JBM Calculations:");
+
+            var result;
+            //Range To Or Size creation
+            calcArgs.rangeToOrSize = ballistic.distanceLogic.convert(parseFloat($('#rangeToOrSize').val()), rangeToOrSizeUnit.val(), ballistic.distanceUnits.Foot);
+
+            //Creation step
+            //calcArgs.step = parseFloat($('#step').val());
+			calcArgs.step = ballistic.distanceLogic.convert(parseFloat($('#step').val()), stepUnit.val(), ballistic.distanceUnits.Foot);
+            var resultTarget = $('#resultTarget');
+            resultTarget.empty();
+            switch (calcTarget) {
+                case "elevationAngle":
+//                        calcArgs.rangeToOrSize = 0;
+//                        calcArgs.step = 1;
+//                        calcArgs.shot = new ballistic.shot(0, 0, 0);
+                    drawElevationAngle(ballistic.jbmCalculator.calculate(calcArgs));
+                    break;
+                case "elevationAngleAndRange":
+                    var result = ballistic.jbmCalculator.calculate(calcArgs);
+                    drawElevationAngle(result);
+                    drawRangeTable(result);
+
+                    break;
+                case "range":
+                    result = ballistic.jbmCalculator.calculate(calcArgs);
+                    drawRangeTable(result);
+                    break;
+                case "dangerZone":
+                    result = ballistic.jbmCalculator.calculate(calcArgs);
+                    drawRangeTable(result);
+                    break;
+            }
+
+
+        });
+
+    });
+
+
+</script>
+</body>
+</html>

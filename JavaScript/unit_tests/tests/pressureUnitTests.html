@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Pressure Unit Tests</title>
+        <script src="../../3rd_party/jquery-1.11.3.js"></script>
+        <script src="../../3rd_party/qunit/qunit-1.20.0.js"></script>
+        <script src="../../Math/ballistic.js"></script>
+        <script src="../js/help.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="../../3rd_party/qunit/qunit.css">
+        <style>
+            body {
+                background-color: #bebdbb;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="margin: 15px">
+            <a style="font-size: 25px; text-decoration: none; color: #0D3349;" href="../index.html"> << Back</a>
+        </div>
+        <div style="margin: 15px; color: #0D3349; font-size: 25px;"> Referent value is: <script type="text/javascript">document.write(REFERENT_VALUE.toString());</script></div>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+
+        <!--UNIT TEST SECTION-->
+        <script type="text/javascript">
+            var DESKTOP_IN_HG = 29.53;
+            var DESKTOP_MM_HG = 750.062;
+            var DESKTOP_BAR = 1.00000042263191;
+
+            var ballistic = new BallisticCalculator();
+
+            var pressureInHG = new ballistic.pressure(29.53, ballistic.pressureUnits.InchHg);
+            var pressureMmHg = new ballistic.pressure(750.062, ballistic.pressureUnits.MmHg);
+            var pressureBar = new ballistic.pressure(1.0000004226319077, ballistic.pressureUnits.Bar);
+
+
+
+            //Unit tests
+            QUnit.test( "Ballistic calculator instance check", function(assert) {
+                assert.ok( check(ballistic), "Passed!" );
+            });
+
+            QUnit.test( "Pressure in HG instance check", function(assert) {
+                assert.ok( check(pressureInHG), "Passed!" );
+            });
+
+            QUnit.test( "Pressure in MmHg instance check", function(assert) {
+                assert.ok( check(pressureMmHg), "Passed!" );
+            });
+
+            QUnit.test( "Pressure in Bar instance check", function(assert) {
+                assert.ok( check(pressureBar), "Passed!" );
+            });
+
+            /*****************Check With Reference Values****************/
+
+            QUnit.test( "Check pressure in InHG with desktop value", function(assert) {
+                var result = pressureInHG.get(ballistic.pressureUnits.InchHg) - DESKTOP_IN_HG;
+                assert.ok( result < REFERENT_VALUE, "Passed! Desktop value is: " + DESKTOP_IN_HG + ", JS value is: " + pressureInHG.get(ballistic.pressureUnits.InchHg)
+                + ", Difference is: " + result );
+            });
+
+            QUnit.test( "Check pressure in MM HG with desktop value", function(assert) {
+                var result = pressureMmHg.get(ballistic.pressureUnits.MmHg) - DESKTOP_MM_HG;
+                assert.ok( result < REFERENT_VALUE, "Passed! Desktop value is: " + DESKTOP_MM_HG + ", JS value is: " + pressureMmHg.get(ballistic.pressureUnits.MmHg)
+                + ", Difference is: " + result );
+            });
+
+            QUnit.test( "Check pressure in Bar with desktop value", function(assert) {
+                var result = pressureBar.get(ballistic.pressureUnits.Bar) - DESKTOP_BAR;
+                assert.ok( result < REFERENT_VALUE, "Passed! Desktop value is: " + DESKTOP_BAR + ", JS value is: " + pressureBar.get(ballistic.pressureUnits.Bar)
+                + ", Difference is: " + result );
+            });
+
+            //InHG to
+            QUnit.test( "Check convert InHG to InHG", function(assert) {
+                var convertResult = ballistic.pressureLogic.convert(DESKTOP_IN_HG, ballistic.pressureUnits.InchHg, ballistic.pressureUnits.InchHg);
+                var result = convertResult - DESKTOP_IN_HG;
+                assert.ok( result < REFERENT_VALUE, "Passed pressure InHG value is: " + DESKTOP_IN_HG + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_IN_HG + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert InHG to MmHG", function(assert) {
+                var convertResult = ballistic.pressureLogic.convert(DESKTOP_IN_HG, ballistic.pressureUnits.InchHg, ballistic.pressureUnits.MmHg);
+                var result = convertResult - DESKTOP_MM_HG;
+                assert.ok( result < REFERENT_VALUE, "Passed pressure InHG value is: " + DESKTOP_IN_HG + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_MM_HG + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert InHG to Bar", function(assert) {
+                var convertResult = ballistic.pressureLogic.convert(DESKTOP_IN_HG, ballistic.pressureUnits.InchHg, ballistic.pressureUnits.Bar);
+                var result = convertResult - DESKTOP_BAR;
+                assert.ok( result < REFERENT_VALUE, "Passed pressure InHG value is: " + DESKTOP_IN_HG + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_BAR + " ) value is: " + result);
+            });
+
+            //MmHG to
+            QUnit.test( "Check convert MmHG to MmHG", function(assert) {
+                var convertResult = ballistic.pressureLogic.convert(DESKTOP_MM_HG, ballistic.pressureUnits.MmHg, ballistic.pressureUnits.MmHg);
+                var result = convertResult - DESKTOP_MM_HG;
+                assert.ok( result < REFERENT_VALUE, "Passed pressure MmHG value is: " + DESKTOP_MM_HG + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_MM_HG + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert MmHG to InHG", function(assert) {
+                var convertResult = ballistic.pressureLogic.convert(DESKTOP_MM_HG, ballistic.pressureUnits.MmHg, ballistic.pressureUnits.InchHg);
+                var result = convertResult - DESKTOP_IN_HG;
+                assert.ok( result < REFERENT_VALUE, "Passed pressure MmHG value is: " + DESKTOP_MM_HG + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_IN_HG + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert MmHG to Bar", function(assert) {
+                var convertResult = ballistic.pressureLogic.convert(DESKTOP_MM_HG, ballistic.pressureUnits.MmHg, ballistic.pressureUnits.Bar);
+                var result = convertResult - DESKTOP_BAR;
+                assert.ok( result < REFERENT_VALUE, "Passed pressure MmHG value is: " + DESKTOP_MM_HG + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_BAR + " ) value is: " + result);
+            });
+
+            //Bar to
+            QUnit.test( "Check convert Bar to MmHG", function(assert) {
+                var convertResult = ballistic.pressureLogic.convert(DESKTOP_BAR, ballistic.pressureUnits.Bar, ballistic.pressureUnits.MmHg);
+                var result = convertResult - DESKTOP_MM_HG;
+                assert.ok( result < REFERENT_VALUE, "Passed pressure Bar value is: " + DESKTOP_BAR + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_MM_HG + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert Bar to InHG", function(assert) {
+                var convertResult = ballistic.pressureLogic.convert(DESKTOP_BAR, ballistic.pressureUnits.Bar, ballistic.pressureUnits.InchHg);
+                var result = convertResult - DESKTOP_IN_HG;
+                assert.ok( result < REFERENT_VALUE, "Passed pressure Bar value is: " + DESKTOP_BAR + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_IN_HG + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert Bar to Bar", function(assert) {
+                var convertResult = ballistic.pressureLogic.convert(DESKTOP_BAR, ballistic.pressureUnits.Bar, ballistic.pressureUnits.Bar);
+                var result = convertResult - DESKTOP_BAR;
+                assert.ok( result < REFERENT_VALUE, "Passed pressure Bar value is: " + DESKTOP_BAR + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_BAR + " ) value is: " + result);
+            });
+
+        </script>
+    </body>
+</html>

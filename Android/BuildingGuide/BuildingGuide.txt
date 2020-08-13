@@ -1,0 +1,11 @@
+
+BallisticCalculator for Android. Build guide.
+
+1. Prerequisites
+ - Xamarin
+ - Visual Studio 2015 or Visual Studio 2013
+ - Android SDK (Android API 19 or higher must be installed)
+ 
+ 2. Buildind
+ Open the solution file (Android/BallisticCalculator.sln) in Visual Studio and press "Build solution".
+ Connect device and press "Run" button or press F5 key.

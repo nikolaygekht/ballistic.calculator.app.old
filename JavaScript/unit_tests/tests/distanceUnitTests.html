@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Distance Unit Tests</title>
+        <script src="../../3rd_party/jquery-1.11.3.js"></script>
+        <script src="../../3rd_party/qunit/qunit-1.20.0.js"></script>
+        <script src="../../Math/ballistic.js"></script>
+        <script src="../js/help.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="../../3rd_party/qunit/qunit.css">
+        <style>
+            body {
+                background-color: #bebdbb;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="margin: 15px">
+            <a style="font-size: 25px; text-decoration: none; color: #0D3349;" href="../index.html"> << Back</a>
+        </div>
+        <div style="margin: 15px; color: #0D3349; font-size: 25px;"> Referent value is: <script type="text/javascript">document.write(REFERENT_VALUE.toString());</script></div>
+        <div id="qunit"></div>
+        <div id="qunit-fixture"></div>
+        <!--UNIT TEST SECTION-->
+        <script type="text/javascript">
+
+
+            /*********Desktop Reference Values**********/
+            var DESKTOP_INCH = 1;
+            var DESKTOP_FOOT = 0.0833333333333333;
+            var DESKTOP_YARD = 0.0277777777777778;
+            var DESKTOP_MILE = 1.57828282828283e-05;
+            var DESKTOP_MILLIMETER = 25.4;
+            var DESKTOP_CENTIMETER = 2.54;
+            var DESKTOP_METER = 0.0254;
+            var DESKTOP_KILOMETER = 2.54e-05;
+
+
+            var ballistic = new BallisticCalculator();
+            var distanceInch = new ballistic.distance(1, ballistic.distanceUnits.Inch);
+            var distanceFoot = new ballistic.distance(0.08333333333333333, ballistic.distanceUnits.Foot);
+            var distanceYard = new ballistic.distance(0.027777777777777776, ballistic.distanceUnits.Yard);
+            var distanceMile = new ballistic.distance(0.000015782828282828283, ballistic.distanceUnits.Mile);
+            var distanceMillimeter = new ballistic.distance(25.4, ballistic.distanceUnits.Millimeter);
+            var distanceCentimeter = new ballistic.distance(2.54, ballistic.distanceUnits.Centimeter);
+            var distanceMeter = new ballistic.distance(0.0254, ballistic.distanceUnits.Meter);
+            var distanceKilometer = new ballistic.distance(0.000025399999999999997, ballistic.distanceUnits.Kilometer);
+
+            //Unit tests
+            QUnit.test( "Ballistic calculator instance check", function(assert) {
+                assert.ok( check(ballistic), "Passed!" );
+            });
+
+            QUnit.test( "Distance inch instance check", function(assert) {
+                assert.ok( check(distanceInch), "Passed!" );
+            });
+
+            QUnit.test( "Distance foot instance check", function(assert) {
+                assert.ok( check(distanceFoot), "Passed!" );
+            });
+
+            QUnit.test( "Distance yard instance check", function(assert) {
+                assert.ok( check(distanceYard), "Passed!" );
+            });
+
+            QUnit.test( "Distance mile instance check", function(assert) {
+                assert.ok( check(distanceMile), "Passed!" );
+            });
+
+            QUnit.test( "Distance millimeter instance check", function(assert) {
+                assert.ok( check(distanceMillimeter), "Passed!" );
+            });
+
+            QUnit.test( "Distance centimeter instance check", function(assert) {
+                assert.ok( check(distanceCentimeter), "Passed!" );
+            });
+
+            QUnit.test( "Distance meter instance check", function(assert) {
+                assert.ok( check(distanceMeter), "Passed!" );
+            });
+
+            QUnit.test( "Distance kilometer instance check", function(assert) {
+                assert.ok( check(distanceKilometer), "Passed!" );
+            });
+
+            /*****************Check With Reference Values****************/
+
+            QUnit.test( "Check distance inch with desktop value", function(assert) {
+                var result = distanceInch.get(ballistic.distanceUnits.Inch) - DESKTOP_INCH;
+                assert.ok( result < REFERENT_VALUE, "Passed! Desktop value is: " + DESKTOP_INCH + ", JS value is: " + distanceInch.get(ballistic.distanceUnits.Inch)
+                + ", Difference is: " + result );
+            });
+
+            QUnit.test( "Check distance foot with desktop value", function(assert) {
+                var result = distanceFoot.get(ballistic.distanceUnits.Foot) - DESKTOP_FOOT;
+                assert.ok( result < REFERENT_VALUE, "Passed! Desktop value is: " + DESKTOP_FOOT + ", JS value is: " + distanceFoot.get(ballistic.distanceUnits.Foot)
+                + ", Difference is: " + result );
+            });
+
+            QUnit.test( "Check distance yard with desktop value", function(assert) {
+                var result = distanceYard.get(ballistic.distanceUnits.Yard) - DESKTOP_YARD;
+                assert.ok( result < REFERENT_VALUE, "Passed! Desktop value is: " + DESKTOP_YARD + ", JS value is: " + distanceYard.get(ballistic.distanceUnits.Yard)
+                + ", Difference is: " + result );
+            });
+
+            QUnit.test( "Check distance mile with desktop value", function(assert) {
+                var result = distanceMile.get(ballistic.distanceUnits.Mile) - DESKTOP_MILE;
+                assert.ok( result < REFERENT_VALUE, "Passed! Desktop value is: " + DESKTOP_MILE + ", JS value is: " + distanceMile.get(ballistic.distanceUnits.Mile)
+                + ", Difference is: " + result );
+            });
+
+            QUnit.test( "Check distance millimeter with desktop value", function(assert) {
+                var result = distanceMillimeter.get(ballistic.distanceUnits.Millimeter) - DESKTOP_MILLIMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed! Desktop value is: " + DESKTOP_MILLIMETER + ", JS value is: " + distanceMillimeter.get(ballistic.distanceUnits.Millimeter)
+                + ", Difference is: " + result );
+            });
+
+            QUnit.test( "Check distance centimeter with desktop value", function(assert) {
+                var result = distanceCentimeter.get(ballistic.distanceUnits.Centimeter) - DESKTOP_CENTIMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed! Desktop value is: " + DESKTOP_CENTIMETER + ", JS value is: " + distanceCentimeter.get(ballistic.distanceUnits.Centimeter)
+                + ", Difference is: " + result );
+            });
+
+            QUnit.test( "Check distance meter with desktop value", function(assert) {
+                var result = distanceMeter.get(ballistic.distanceUnits.Meter) - DESKTOP_METER;
+                assert.ok( result < REFERENT_VALUE, "Passed! Desktop value is: " + DESKTOP_METER + ", JS value is: " + distanceMeter.get(ballistic.distanceUnits.Meter)
+                + ", Difference is: " + result );
+            });
+
+            QUnit.test( "Check distance kilometer with desktop value", function(assert) {
+                var result = distanceKilometer.get(ballistic.distanceUnits.Kilometer) - DESKTOP_KILOMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed! Desktop value is: " + DESKTOP_KILOMETER + ", JS value is: " + distanceKilometer.get(ballistic.distanceUnits.Kilometer)
+                + ", Difference is: " + result );
+            });
+
+            /****************Convert test*****************/
+            QUnit.test( "Check convert inch to inch", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_INCH, ballistic.distanceUnits.Inch, ballistic.distanceUnits.Inch);
+                var result = convertResult - DESKTOP_INCH;
+                assert.ok( result < REFERENT_VALUE, "Passed inch value is: " + DESKTOP_INCH + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_INCH + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert inch to foot", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_INCH, ballistic.distanceUnits.Inch, ballistic.distanceUnits.Foot);
+                var result = convertResult - DESKTOP_FOOT;
+                assert.ok( result < REFERENT_VALUE, "Passed inch value is: " + DESKTOP_INCH + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_FOOT + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert inch to yard", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_INCH, ballistic.distanceUnits.Inch, ballistic.distanceUnits.Yard);
+                var result = convertResult - DESKTOP_YARD;
+                assert.ok( result < REFERENT_VALUE, "Passed inch value is: " + DESKTOP_INCH + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_YARD + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert inch to mile", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_INCH, ballistic.distanceUnits.Inch, ballistic.distanceUnits.Mile);
+                var result = convertResult - DESKTOP_MILE;
+                assert.ok( result < REFERENT_VALUE, "Passed inch value is: " + DESKTOP_INCH + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_MILE + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert inch to millimeter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_INCH, ballistic.distanceUnits.Inch, ballistic.distanceUnits.Millimeter);
+                var result = convertResult - DESKTOP_MILLIMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed inch value is: " + DESKTOP_INCH + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_MILLIMETER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert inch to centimeter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_INCH, ballistic.distanceUnits.Inch, ballistic.distanceUnits.Centimeter);
+                var result = convertResult - DESKTOP_CENTIMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed inch value is: " + DESKTOP_INCH + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_CENTIMETER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert inch to meter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_INCH, ballistic.distanceUnits.Inch, ballistic.distanceUnits.Meter);
+                var result = convertResult - DESKTOP_METER;
+                assert.ok( result < REFERENT_VALUE, "Passed inch value is: " + DESKTOP_INCH + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_METER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert inch to kilometer", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_INCH, ballistic.distanceUnits.Inch, ballistic.distanceUnits.Kilometer);
+                var result = convertResult - DESKTOP_KILOMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed inch value is: " + DESKTOP_INCH + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_KILOMETER + " ) value is: " + result);
+            });
+
+            //Foot to
+
+            QUnit.test( "Check convert foot to inch", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_FOOT, ballistic.distanceUnits.Foot, ballistic.distanceUnits.Inch);
+                var result = convertResult - DESKTOP_INCH;
+                assert.ok( result < REFERENT_VALUE, "Passed foot value is: " + DESKTOP_FOOT + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_INCH + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert foot to foot", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_FOOT, ballistic.distanceUnits.Foot, ballistic.distanceUnits.Foot);
+                var result = convertResult - DESKTOP_FOOT;
+                assert.ok( result < REFERENT_VALUE, "Passed foot value is: " + DESKTOP_FOOT + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_FOOT + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert foot to yard", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_FOOT, ballistic.distanceUnits.Foot, ballistic.distanceUnits.Yard);
+                var result = convertResult - DESKTOP_YARD;
+                assert.ok( result < REFERENT_VALUE, "Passed foot value is: " + DESKTOP_FOOT + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_YARD + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert foot to mile", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_FOOT, ballistic.distanceUnits.Foot, ballistic.distanceUnits.Mile);
+                var result = convertResult - DESKTOP_MILE;
+                assert.ok( result < REFERENT_VALUE, "Passed foot value is: " + DESKTOP_FOOT + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_MILE + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert foot to millimeter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_FOOT, ballistic.distanceUnits.Foot, ballistic.distanceUnits.Millimeter);
+                var result = convertResult - DESKTOP_MILLIMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed foot value is: " + DESKTOP_FOOT + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_MILLIMETER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert foot to centimeter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_FOOT, ballistic.distanceUnits.Foot, ballistic.distanceUnits.Centimeter);
+                var result = convertResult - DESKTOP_CENTIMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed foot value is: " + DESKTOP_FOOT + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_CENTIMETER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert foot to meter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_FOOT, ballistic.distanceUnits.Foot, ballistic.distanceUnits.Meter);
+                var result = convertResult - DESKTOP_METER;
+                assert.ok( result < REFERENT_VALUE, "Passed foot value is: " + DESKTOP_FOOT + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_METER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert foot to kilometer", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_FOOT, ballistic.distanceUnits.Foot, ballistic.distanceUnits.Kilometer);
+                var result = convertResult - DESKTOP_KILOMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed foot value is: " + DESKTOP_FOOT + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_KILOMETER + " ) value is: " + result);
+            });
+
+            //Yard to
+
+            QUnit.test( "Check convert yard to inch", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_YARD, ballistic.distanceUnits.Yard, ballistic.distanceUnits.Inch);
+                var result = convertResult - DESKTOP_INCH;
+                assert.ok( result < REFERENT_VALUE, "Passed yard value is: " + DESKTOP_YARD + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_INCH + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert yard to foot", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_YARD, ballistic.distanceUnits.Yard, ballistic.distanceUnits.Foot);
+                var result = convertResult - DESKTOP_FOOT;
+                assert.ok( result < REFERENT_VALUE, "Passed yard value is: " + DESKTOP_YARD + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_FOOT + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert yard to yard", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_YARD, ballistic.distanceUnits.Yard, ballistic.distanceUnits.Yard);
+                var result = convertResult - DESKTOP_YARD;
+                assert.ok( result < REFERENT_VALUE, "Passed yard value is: " + DESKTOP_YARD + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_YARD + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert yard to mile", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_YARD, ballistic.distanceUnits.Yard, ballistic.distanceUnits.Mile);
+                var result = convertResult - DESKTOP_MILE;
+                assert.ok( result < REFERENT_VALUE, "Passed yard value is: " + DESKTOP_YARD + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_MILE + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert yard to millimeter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_YARD, ballistic.distanceUnits.Yard, ballistic.distanceUnits.Millimeter);
+                var result = convertResult - DESKTOP_MILLIMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed yard value is: " + DESKTOP_YARD + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_MILLIMETER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert yard to centimeter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_YARD, ballistic.distanceUnits.Yard, ballistic.distanceUnits.Centimeter);
+                var result = convertResult - DESKTOP_CENTIMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed yard value is: " + DESKTOP_YARD + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_CENTIMETER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert yard to meter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_YARD, ballistic.distanceUnits.Yard, ballistic.distanceUnits.Meter);
+                var result = convertResult - DESKTOP_METER;
+                assert.ok( result < REFERENT_VALUE, "Passed yard value is: " + DESKTOP_YARD + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_METER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert yard to kilometer", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_YARD, ballistic.distanceUnits.Yard, ballistic.distanceUnits.Kilometer);
+                var result = convertResult - DESKTOP_KILOMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed yard value is: " + DESKTOP_YARD + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_KILOMETER + " ) value is: " + result);
+            });
+
+            //Mile to
+
+            QUnit.test( "Check convert mile to inch", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_MILE, ballistic.distanceUnits.Mile, ballistic.distanceUnits.Inch);
+                var result = convertResult - DESKTOP_INCH;
+                assert.ok( result < REFERENT_VALUE, "Passed mile value is: " + DESKTOP_MILE + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_INCH + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert mile to foot", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_MILE, ballistic.distanceUnits.Mile, ballistic.distanceUnits.Foot);
+                var result = convertResult - DESKTOP_FOOT;
+                assert.ok( result < REFERENT_VALUE, "Passed mile value is: " + DESKTOP_MILE + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_FOOT + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert mile to yard", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_MILE, ballistic.distanceUnits.Mile, ballistic.distanceUnits.Yard);
+                var result = convertResult - DESKTOP_YARD;
+                assert.ok( result < REFERENT_VALUE, "Passed mile value is: " + DESKTOP_MILE + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_YARD + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert mile to mile", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_MILE, ballistic.distanceUnits.Mile, ballistic.distanceUnits.Mile);
+                var result = convertResult - DESKTOP_MILE;
+                assert.ok( result < REFERENT_VALUE, "Passed mile value is: " + DESKTOP_MILE + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_MILE + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert mile to millimeter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_MILE, ballistic.distanceUnits.Mile, ballistic.distanceUnits.Millimeter);
+                var result = convertResult - DESKTOP_MILLIMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed mile value is: " + DESKTOP_MILE + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_MILLIMETER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert mile to centimeter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_MILE, ballistic.distanceUnits.Mile, ballistic.distanceUnits.Centimeter);
+                var result = convertResult - DESKTOP_CENTIMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed mile value is: " + DESKTOP_MILE + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_CENTIMETER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert mile to meter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_MILE, ballistic.distanceUnits.Mile, ballistic.distanceUnits.Meter);
+                var result = convertResult - DESKTOP_METER;
+                assert.ok( result < REFERENT_VALUE, "Passed mile value is: " + DESKTOP_MILE + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_METER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert mile to kilometer", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_MILE, ballistic.distanceUnits.Mile, ballistic.distanceUnits.Kilometer);
+                var result = convertResult - DESKTOP_KILOMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed mile value is: " + DESKTOP_MILE + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_KILOMETER + " ) value is: " + result);
+            });
+
+
+            //Millimeter to
+            QUnit.test( "Check convert millimeter to inch", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_MILLIMETER, ballistic.distanceUnits.Millimeter, ballistic.distanceUnits.Inch);
+                var result = convertResult - DESKTOP_INCH;
+                assert.ok( result < REFERENT_VALUE, "Passed millimeter value is: " + DESKTOP_MILLIMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_INCH + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert millimeter to foot", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_MILLIMETER, ballistic.distanceUnits.Millimeter, ballistic.distanceUnits.Foot);
+                var result = convertResult - DESKTOP_FOOT;
+                assert.ok( result < REFERENT_VALUE, "Passed millimeter value is: " + DESKTOP_MILLIMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_FOOT + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert millimeter to yard", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_MILLIMETER, ballistic.distanceUnits.Millimeter, ballistic.distanceUnits.Yard);
+                var result = convertResult - DESKTOP_YARD;
+                assert.ok( result < REFERENT_VALUE, "Passed millimeter value is: " + DESKTOP_MILLIMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_YARD + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert millimeter to mile", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_MILLIMETER, ballistic.distanceUnits.Millimeter, ballistic.distanceUnits.Mile);
+                var result = convertResult - DESKTOP_MILE;
+                assert.ok( result < REFERENT_VALUE, "Passed millimeter value is: " + DESKTOP_MILLIMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_MILE + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert millimeter to millimeter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_MILLIMETER, ballistic.distanceUnits.Millimeter, ballistic.distanceUnits.Millimeter);
+                var result = convertResult - DESKTOP_MILLIMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed millimeter value is: " + DESKTOP_MILLIMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_MILLIMETER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert millimeter to centimeter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_MILLIMETER, ballistic.distanceUnits.Millimeter, ballistic.distanceUnits.Centimeter);
+                var result = convertResult - DESKTOP_CENTIMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed millimeter value is: " + DESKTOP_MILLIMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_CENTIMETER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert millimeter to meter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_MILLIMETER, ballistic.distanceUnits.Millimeter, ballistic.distanceUnits.Meter);
+                var result = convertResult - DESKTOP_METER;
+                assert.ok( result < REFERENT_VALUE, "Passed millimeter value is: " + DESKTOP_MILLIMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_METER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert millimeter to kilometer", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_MILLIMETER, ballistic.distanceUnits.Millimeter, ballistic.distanceUnits.Kilometer);
+                var result = convertResult - DESKTOP_KILOMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed millimeter value is: " + DESKTOP_MILLIMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_KILOMETER + " ) value is: " + result);
+            });
+
+
+            //Centimeter to
+            QUnit.test( "Check convert centimeter to inch", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_CENTIMETER, ballistic.distanceUnits.Centimeter, ballistic.distanceUnits.Inch);
+                var result = convertResult - DESKTOP_INCH;
+                assert.ok( result < REFERENT_VALUE, "Passed centimeter value is: " + DESKTOP_CENTIMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_INCH + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert centimeter to foot", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_CENTIMETER, ballistic.distanceUnits.Centimeter, ballistic.distanceUnits.Foot);
+                var result = convertResult - DESKTOP_FOOT;
+                assert.ok( result < REFERENT_VALUE, "Passed centimeter value is: " + DESKTOP_CENTIMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_FOOT + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert centimeter to yard", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_CENTIMETER, ballistic.distanceUnits.Centimeter, ballistic.distanceUnits.Yard);
+                var result = convertResult - DESKTOP_YARD;
+                assert.ok( result < REFERENT_VALUE, "Passed centimeter value is: " + DESKTOP_CENTIMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_YARD + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert centimeter to mile", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_CENTIMETER, ballistic.distanceUnits.Centimeter, ballistic.distanceUnits.Mile);
+                var result = convertResult - DESKTOP_MILE;
+                assert.ok( result < REFERENT_VALUE, "Passed centimeter value is: " + DESKTOP_CENTIMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_MILE + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert centimeter to millimeter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_CENTIMETER, ballistic.distanceUnits.Centimeter, ballistic.distanceUnits.Millimeter);
+                var result = convertResult - DESKTOP_MILLIMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed centimeter value is: " + DESKTOP_CENTIMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_MILLIMETER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert centimeter to centimeter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_CENTIMETER, ballistic.distanceUnits.Centimeter, ballistic.distanceUnits.Centimeter);
+                var result = convertResult - DESKTOP_CENTIMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed centimeter value is: " + DESKTOP_CENTIMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_CENTIMETER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert centimeter to meter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_CENTIMETER, ballistic.distanceUnits.Centimeter, ballistic.distanceUnits.Meter);
+                var result = convertResult - DESKTOP_METER;
+                assert.ok( result < REFERENT_VALUE, "Passed centimeter value is: " + DESKTOP_CENTIMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_METER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert centimeter to kilometer", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_CENTIMETER, ballistic.distanceUnits.Centimeter, ballistic.distanceUnits.Kilometer);
+                var result = convertResult - DESKTOP_KILOMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed centimeter value is: " + DESKTOP_CENTIMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_KILOMETER + " ) value is: " + result);
+            });
+
+
+            //Meter to
+            QUnit.test( "Check convert meter to inch", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_METER, ballistic.distanceUnits.Meter, ballistic.distanceUnits.Inch);
+                var result = convertResult - DESKTOP_INCH;
+                assert.ok( result < REFERENT_VALUE, "Passed meter value is: " + DESKTOP_METER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_INCH + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert meter to foot", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_METER, ballistic.distanceUnits.Meter, ballistic.distanceUnits.Foot);
+                var result = convertResult - DESKTOP_FOOT;
+                assert.ok( result < REFERENT_VALUE, "Passed meter value is: " + DESKTOP_METER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_FOOT + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert meter to yard", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_METER, ballistic.distanceUnits.Meter, ballistic.distanceUnits.Yard);
+                var result = convertResult - DESKTOP_YARD;
+                assert.ok( result < REFERENT_VALUE, "Passed meter value is: " + DESKTOP_METER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_YARD + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert meter to mile", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_METER, ballistic.distanceUnits.Meter, ballistic.distanceUnits.Mile);
+                var result = convertResult - DESKTOP_MILE;
+                assert.ok( result < REFERENT_VALUE, "Passed meter value is: " + DESKTOP_METER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_MILE + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert meter to millimeter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_METER, ballistic.distanceUnits.Meter, ballistic.distanceUnits.Millimeter);
+                var result = convertResult - DESKTOP_MILLIMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed meter value is: " + DESKTOP_METER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_MILLIMETER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert meter to centimeter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_METER, ballistic.distanceUnits.Meter, ballistic.distanceUnits.Centimeter);
+                var result = convertResult - DESKTOP_CENTIMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed meter value is: " + DESKTOP_METER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_CENTIMETER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert meter to meter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_METER, ballistic.distanceUnits.Meter, ballistic.distanceUnits.Meter);
+                var result = convertResult - DESKTOP_METER;
+                assert.ok( result < REFERENT_VALUE, "Passed meter value is: " + DESKTOP_METER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_METER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert meter to kilometer", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_METER, ballistic.distanceUnits.Meter, ballistic.distanceUnits.Kilometer);
+                var result = convertResult - DESKTOP_KILOMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed meter value is: " + DESKTOP_METER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_KILOMETER + " ) value is: " + result);
+            });
+
+
+            //Kilometer to
+
+            QUnit.test( "Check convert kilometer  to inch", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_KILOMETER, ballistic.distanceUnits.Kilometer, ballistic.distanceUnits.Inch);
+                var result = convertResult - DESKTOP_INCH;
+                assert.ok( result < REFERENT_VALUE, "Passed kilometer value is: " + DESKTOP_KILOMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_INCH + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert kilometer to foot", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_KILOMETER, ballistic.distanceUnits.Kilometer, ballistic.distanceUnits.Foot);
+                var result = convertResult - DESKTOP_FOOT;
+                assert.ok( result < REFERENT_VALUE, "Passed kilometer value is: " + DESKTOP_KILOMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_FOOT + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert kilometer to yard", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_KILOMETER, ballistic.distanceUnits.Kilometer, ballistic.distanceUnits.Yard);
+                var result = convertResult - DESKTOP_YARD;
+                assert.ok( result < REFERENT_VALUE, "Passed kilometer value is: " + DESKTOP_KILOMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_YARD + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert kilometer to mile", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_KILOMETER, ballistic.distanceUnits.Kilometer, ballistic.distanceUnits.Mile);
+                var result = convertResult - DESKTOP_MILE;
+                assert.ok( result < REFERENT_VALUE, "Passed kilometer value is: " + DESKTOP_KILOMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_MILE + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert kilometer to millimeter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_KILOMETER, ballistic.distanceUnits.Kilometer, ballistic.distanceUnits.Millimeter);
+                var result = convertResult - DESKTOP_MILLIMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed kilometer value is: " + DESKTOP_KILOMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_MILLIMETER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert kilometer to centimeter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_KILOMETER, ballistic.distanceUnits.Kilometer, ballistic.distanceUnits.Centimeter);
+                var result = convertResult - DESKTOP_CENTIMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed kilometer value is: " + DESKTOP_KILOMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_CENTIMETER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert kilometer to meter", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_KILOMETER, ballistic.distanceUnits.Kilometer, ballistic.distanceUnits.Meter);
+                var result = convertResult - DESKTOP_METER;
+                assert.ok( result < REFERENT_VALUE, "Passed kilometer value is: " + DESKTOP_KILOMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_METER + " ) value is: " + result);
+            });
+
+            QUnit.test( "Check convert kilometer to kilometer", function(assert) {
+                var convertResult = ballistic.distanceLogic.convert(DESKTOP_KILOMETER, ballistic.distanceUnits.Kilometer, ballistic.distanceUnits.Kilometer);
+                var result = convertResult - DESKTOP_KILOMETER;
+                assert.ok( result < REFERENT_VALUE, "Passed kilometer value is: " + DESKTOP_KILOMETER + ", Convert result is: " + convertResult + ", Difference with reference ( " + DESKTOP_KILOMETER + " ) value is: " + result);
+            });
+        </script>
+    </body>
+</html>

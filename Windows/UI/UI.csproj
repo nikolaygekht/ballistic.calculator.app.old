@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0CFFCA00-B702-40EB-9C18-1322863558AB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Gehtsoft.BallisticCalculator.UI</RootNamespace>
+    <AssemblyName>Gehtsoft.BallisticCalculator.UI</AssemblyName>
+    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GemBox.Spreadsheet, Version=39.3.30.1119, Culture=neutral, PublicKeyToken=b1b72c69714d4847, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdparty\GemBox.Spreadsheet.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="ZedGraph">
+      <HintPath>..\3rdparty\ZedGraph.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\AngleSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\AngleSelector.Designer.cs">
+      <DependentUpon>AngleSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\Input\SpinDriftInfoInput.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\Input\SpinDriftInfoInput.Designer.cs">
+      <DependentUpon>SpinDriftInfoInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\IMeasurementSystemListener.cs" />
+    <Compile Include="src\Input\AtmoInfoInput.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\Input\AtmoInfoInput.Designer.cs">
+      <DependentUpon>AtmoInfoInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\Input\BulletInfoInput.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\Input\BulletInfoInput.Designer.cs">
+      <DependentUpon>BulletInfoInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\Input\Utils\BulletList.cs" />
+    <Compile Include="src\Input\Utils\CaliberList.cs" />
+    <Compile Include="src\Input\Utils\DriftInfoPreset.cs" />
+    <Compile Include="src\Input\Utils\ZeroPreset.cs" />
+    <Compile Include="src\Output\BallisticGraphControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\Output\BallisticGraphControl.Designer.cs">
+      <DependentUpon>BallisticGraphControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\Output\BallisticModel.cs" />
+    <Compile Include="src\Output\BallisticTable.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\Output\BallisticTable.Designer.cs">
+      <DependentUpon>BallisticTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Input\ShotParametersInput.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\Input\ShotParametersInput.Designer.cs">
+      <DependentUpon>ShotParametersInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\Input\ZeroInfoInput.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\Input\ZeroInfoInput.Designer.cs">
+      <DependentUpon>ZeroInfoInput.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\Table\PrintPreviewFactory.cs" />
+    <Compile Include="src\Table\PrintPreviewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\Table\PrintPreviewForm.Designer.cs">
+      <DependentUpon>PrintPreviewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\Table\Table.cs" />
+    <Compile Include="src\XmlSaveController.cs" />
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="src\AngleSelector.resx">
+      <DependentUpon>AngleSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\Input\SpinDriftInfoInput.resx">
+      <DependentUpon>SpinDriftInfoInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\Input\AtmoInfoInput.resx">
+      <DependentUpon>AtmoInfoInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\Input\BulletInfoInput.resx">
+      <DependentUpon>BulletInfoInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\Output\BallisticGraphControl.resx">
+      <DependentUpon>BallisticGraphControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\Output\BallisticTable.resx">
+      <DependentUpon>BallisticTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\Input\ShotParametersInput.resx">
+      <DependentUpon>ShotParametersInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\Input\ZeroInfoInput.resx">
+      <DependentUpon>ZeroInfoInput.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\Table\PrintPreviewForm.resx">
+      <DependentUpon>PrintPreviewForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="key.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Math\Math.csproj">
+      <Project>{93C5B26F-DFA3-4CAA-84B1-F53F61D33E4E}</Project>
+      <Name>Math</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Common\Serialization\Serialization.csproj">
+      <Project>{632F2F5E-7FBF-47D3-8572-59B5F9DBEB7D}</Project>
+      <Name>Serialization</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TypeControls\TypeControls.csproj">
+      <Project>{38B71900-8988-4FF0-BAE2-AE20B0DF35B9}</Project>
+      <Name>TypeControls</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
